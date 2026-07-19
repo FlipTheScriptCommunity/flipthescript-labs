@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/web"
+    },
+    {
+      "path": "./apps/api"
+    },
+    {
+      "path": "./libs/shared-types"
+    },
+    {
+      "path": "./libs/dynamo-client"
+    }
+  ],
+  "compilerOptions": {}
+}

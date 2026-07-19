@@ -1,0 +1,44 @@
+{
+  "name": "@flipthescript-academy/dynamo-client",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts",
+      "default": "./src/index.ts",
+      "@flipthescript-academy/source": "./src/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1090.0",
+    "@aws-sdk/lib-dynamodb": "^3.1090.0"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/vite:build",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "defaultConfiguration": "production",
+        "options": {
+          "outputPath": "libs/dynamo-client/dist"
+        },
+        "configurations": {
+          "development": {
+            "mode": "development"
+          },
+          "production": {
+            "mode": "production"
+          }
+        }
+      }
+    }
+  },
+  "module": "./dist/index.js"
+}

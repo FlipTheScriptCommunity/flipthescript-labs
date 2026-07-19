@@ -1,0 +1,7 @@
+# Cloudflare Pages configuration for the web app.
+# Build the Next.js app for Pages with: bun run pages:build (from apps/web)
+# Deploy with: bunx wrangler pages deploy .vercel/output/static
+name = "flipthescript-academy-web"
+compatibility_date = "2026-01-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
