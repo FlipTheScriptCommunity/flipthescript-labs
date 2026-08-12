@@ -1,12 +1,13 @@
 import './global.css';
-import { Geist } from 'next/font/google';
+import { Rubik } from 'next/font/google';
 import { cn } from '@/lib/utils';
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
+const rubik = Rubik({ subsets: ['latin', 'hebrew'], variable: '--font-sans' });
 
 export const metadata = {
   title: 'FlipTheScript Academy',
-  description: 'FlipTheScript Academy web application',
+  description:
+    'קורסים ומעבדות בחינם ללימוד DevOps ו-AWS, שנבנים על ידי קהילת FlipTheScript.',
 };
 
 export default function RootLayout({
@@ -15,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn('font-sans', geist.variable)}>
+    <html lang="he" dir="rtl" className={cn('font-sans', rubik.variable)}>
       <body>{children}</body>
     </html>
   );
