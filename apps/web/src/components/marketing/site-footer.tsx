@@ -7,7 +7,7 @@ export function SiteFooter() {
           Flip<span className="text-primary">TheScript</span> Academy
         </span>
         <a
-          href="https://github.com/flipthescript"
+          href="https://github.com/FlipTheScriptCommunity"
           className="transition-colors hover:text-foreground"
         >
           GitHub

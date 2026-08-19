@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
 const navLinks = [
-  { label: 'קורסים', href: '#offerings' },
-  { label: 'מעבדות', href: '#offerings' },
+  { label: 'קורסים', href: '/courses' },
+  { label: 'מעבדות', href: '/courses' },
   { label: 'קהילה', href: '#mission' },
-  { label: 'GitHub', href: 'https://github.com/flipthescript' },
+  { label: 'GitHub', href: 'https://github.com/FlipTheScriptCommunity' },
 ];
 
 export function SiteHeader() {
@@ -16,15 +17,25 @@ export function SiteHeader() {
         </span>
 
         <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith('/') ? (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </Link>
+            ) : (
+              <a
+                key={link.label}
+                href={link.href}
+                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+              </a>
+            ),
+          )}
         </nav>
 
         <Button render={<a href="#get-involved" />}>מצטרפים</Button>
