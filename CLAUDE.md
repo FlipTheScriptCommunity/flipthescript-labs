@@ -14,6 +14,11 @@ FlipTheScript Academy — an Nx monorepo using Bun as the package manager and sc
 
 Current state: the API only exposes `GET /health` and `GET /courses` (a DynamoDB scan of a single `flipthescript-academy-courses` table). The `apps/web` frontend courses/labs content is currently static data (`apps/web/src/data/courses.ts`), not yet wired to the API.
 
+## Branding conventions
+
+- The product is named **FlipTheScript Labs** — never "Academy". Update all UI text, page titles, and metadata accordingly.
+- The site header logo (`SiteHeader` in `apps/web/src/components/marketing/site-header.tsx`) must always link to `/` (the homepage).
+
 ## Commands
 
 Always run tasks through Nx, prefixed with `bunx` (the CLI isn't installed globally):
