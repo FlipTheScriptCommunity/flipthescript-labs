@@ -1,0 +1,15 @@
+{
+  "name": "@flipthescript-academy/lab-ec2",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Standalone Cloudscape/React source for the EC2 launch lab embedded at /courses/aws-foundations/labs/ec2. Builds to a static bundle in apps/web/public/labs/ec2 — no runtime dependency on this package, or on Node/npm, is needed to serve the lab.",
+  "scripts": {
+    "build": "bun run build.js"
+  },
+  "devDependencies": {
+    "@cloudscape-design/components": "^3.0.1348",
+    "@cloudscape-design/global-styles": "^1.0.67",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}
