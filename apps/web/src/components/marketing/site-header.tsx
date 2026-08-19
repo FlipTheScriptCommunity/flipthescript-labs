@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 
 const navLinks = [
   { label: 'קורסים', href: '/courses' },
-  { label: 'מעבדות', href: '/courses' },
   { label: 'קהילה', href: '#mission' },
   { label: 'GitHub', href: 'https://github.com/FlipTheScriptCommunity' },
 ];
