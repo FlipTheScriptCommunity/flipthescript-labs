@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppLayout from '@cloudscape-design/components/app-layout';
 import TopNavigation from '@cloudscape-design/components/top-navigation';
 import SideNavigation from '@cloudscape-design/components/side-navigation';
@@ -52,9 +52,42 @@ export default function App() {
   const [tutorialActive, setTutorialActive] = useState(true);
   const [tutorialKey, setTutorialKey] = useState(0);
 
+  // This app lives inside an <iframe> on the course page. Modals/panels here
+  // are portaled to this document's own body and positioned relative to the
+  // iframe's viewport — but if the outer page hasn't scrolled the iframe
+  // fully into view yet, that can land below the fold. Same-origin iframes
+  // can reach their own <iframe> element via window.frameElement, so we ask
+  // the outer page to scroll it into view whenever the tutorial opens.
+  //
+  // A plain scrollIntoView({block: 'start'}) would align the iframe's top
+  // edge with the outer viewport's top edge — but the course page has its
+  // own sticky header there, which would then cover the AWS top nav (and
+  // the Help button in it). So instead we compute the scroll position
+  // ourselves, landing just below that sticky header.
+  const scrollEmbedIntoView = () => {
+    if (typeof window === 'undefined' || !window.frameElement) return;
+    try {
+      const parentWindow = window.parent;
+      const parentDocument = parentWindow.document;
+      const headerHeight = parentDocument.querySelector('header')?.getBoundingClientRect().height ?? 0;
+      const rect = window.frameElement.getBoundingClientRect();
+      const targetY = parentWindow.scrollY + rect.top - headerHeight - 8;
+      parentWindow.scrollTo({ top: Math.max(targetY, 0), behavior: 'smooth' });
+    } catch (e) {
+      // Cross-origin or otherwise inaccessible — fall back to a plain scrollIntoView.
+      window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  useEffect(() => {
+    scrollEmbedIntoView();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const openTutorial = () => {
     setTutorialKey((k) => k + 1);
     setTutorialActive(true);
+    scrollEmbedIntoView();
   };
 
   const closeTutorial = () => {
@@ -88,7 +121,7 @@ export default function App() {
           identity={{ href: '#', title: 'AWS' }}
           utilities={[
             { type: 'button', text: 'N. Virginia', iconName: 'multiscreen' },
-            { type: 'button', text: 'Help', iconName: 'status-info', onClick: openTutorial },
+            { type: 'button', text: 'Help', iconName: 'status-info', variant: 'primary-button', onClick: openTutorial },
             { type: 'button', iconName: 'notification' },
             { type: 'button', iconName: 'settings' },
             {

@@ -38,11 +38,23 @@ export default async function LabPage({ params }: LabPageProps) {
           </p>
         </section>
 
+        {lab.about && lab.about.length > 0 && (
+          <section className="mx-auto max-w-3xl px-6 pb-12">
+            <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
+              <h2 className="text-xl font-bold">על המעבדה</h2>
+              <div className="mt-4 space-y-4">
+                {lab.about.map((paragraph) => (
+                  <p key={paragraph} className="text-muted-foreground">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         {lab.embedPath ? (
           <section className="mx-auto max-w-7xl px-6 pb-16">
-            <p className="mb-3 text-center text-sm text-muted-foreground">
-              סביבת אימון אינטראקטיבית בעיצוב AWS המקורי — לא מחובר לחשבון AWS אמיתי, אין חיוב.
-            </p>
             <LabEmbed src={lab.embedPath} title={`${lab.title} — Interactive lab`} />
           </section>
         ) : (

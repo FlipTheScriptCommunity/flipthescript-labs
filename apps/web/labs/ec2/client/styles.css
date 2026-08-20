@@ -118,15 +118,199 @@ body {
   z-index: 2100;
 }
 
-.tutorial-panel::after {
-  content: '';
-  display: table;
-  clear: both;
+.tutorial-step-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #687078;
+  /* Default (English): tracking reads fine on "Step X of Y". Two earlier
+     scoping attempts here both had real bugs, worth leaving this note for
+     next time: (1) :dir(ltr) got compiled down to a :lang() polyfill by the
+     bundler's CSS minifier, which checks the element's *language*, not its
+     direction — nothing here carries a lang attribute, so it silently
+     matched everything; (2) a plain `[dir='ltr'] .tutorial-step-label`
+     descendant selector also always matched, because <html dir="ltr"> is
+     itself always a matching ancestor regardless of what .tutorial-panel's
+     own (dynamic) dir is set to — CSS descendant selectors match on ANY
+     ancestor having the attribute, not the nearest one. Fix: turn tracking
+     off via a selector anchored to the one element whose dir actually
+     toggles (.tutorial-panel), not "some ltr ancestor exists". */
+  letter-spacing: 0.02em;
+}
+
+.tutorial-panel[dir='rtl'] .tutorial-step-label {
+  letter-spacing: normal;
+}
+
+.tutorial-title {
+  margin: 6px 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #16191f;
+}
+
+.tutorial-description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #16191f;
 }
 
 .tutorial-tip {
+  margin-top: 12px;
+  padding: 10px 12px;
   background: #f2f8fd;
   border: 1px solid #99c7f2;
   border-radius: 8px;
   font-size: 13px;
+  line-height: 1.5;
+  color: #16191f;
+}
+
+/*
+ * FlipTheScript-branded controls (gold/blue/purple, matching the course
+ * platform's own design language) layered on top of the AWS mock, so the
+ * teaching UI — Help trigger, walkthrough panel, language toggle — reads as
+ * "part of the lab" rather than another piece of the simulated AWS console.
+ */
+
+/* Rubik is FlipTheScript's own site font (see FlipTheScript_Design_Guidelines.md) —
+   used here so the teaching layer reads visually as "part of the site" even
+   though the AWS mock underneath keeps its native Cloudscape font. */
+.fts-font,
+.fts-font * {
+  font-family: 'Rubik', 'Assistant', 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Hebrew reads more comfortably with slightly more generous line and word
+   spacing than Latin text needs — applied only where dir has resolved to
+   rtl, so the English tutorial content isn't affected. */
+.fts-font[dir='rtl'] {
+  line-height: 1.7;
+  word-spacing: 0.05em;
+}
+
+/*
+ * Cloudscape's <Modal> (the tutorial's welcome screen) portals its actual
+ * rendered dialog to a DOM node it creates itself, directly under
+ * document.body — entirely outside the React tree we declare it in (see the
+ * long comment in TutorialOverlay.jsx). That means the .fts-font class above
+ * never reaches it: applying it to anything wrapping <Modal> only styles an
+ * empty placeholder, not the real, visible dialog. This lab has exactly one
+ * modal, so targeting Cloudscape's own dialog role directly is safe and
+ * actually reaches the rendered content. Direction similarly can't be scoped
+ * with a class here — TutorialOverlay.jsx instead toggles dir on <html>
+ * itself while this modal is open, which does cascade into it (dir is a
+ * real inherited DOM/CSS attribute, unlike a class we'd have to apply by
+ * hand), so `html[dir='rtl']` is what's used below rather than [dir='rtl']
+ * on the dialog itself, which never carries that attribute directly.
+ */
+[role='dialog'],
+[role='dialog'] * {
+  font-family: 'Rubik', 'Assistant', 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+html[dir='rtl'] [role='dialog'] {
+  line-height: 1.7;
+  word-spacing: 0.05em;
+}
+
+.fts-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fts-panel-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.fts-panel-actions-end {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fts-lang-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.fts-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.fts-lang-toggle {
+  display: inline-flex;
+  border: 1.5px solid #8e44ad;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fts-lang-toggle button {
+  border: none;
+  background: transparent;
+  color: #8e44ad;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.fts-lang-toggle button:hover:not(.active) {
+  background: rgba(142, 68, 173, 0.08);
+}
+
+.fts-lang-toggle button.active {
+  background: #8e44ad;
+  color: #ffffff;
+}
+
+.fts-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 20px;
+  background: #f3b61f;
+  color: #0a0b10;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.fts-btn-primary:hover {
+  filter: brightness(1.06);
+}
+
+.fts-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid #2a8bf2;
+  border-radius: 8px;
+  padding: 7.5px 18px;
+  background: transparent;
+  color: #2a8bf2;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.fts-btn-secondary:hover {
+  background: rgba(42, 139, 242, 0.08);
 }

@@ -10,6 +10,12 @@ export interface Lab {
    * apps/web/labs/<labId>/README.md for the source of the embedded bundle.
    */
   embedPath?: string;
+  /**
+   * Short, plain-language paragraphs (Hebrew) explaining what the lab is
+   * about and what students will practice. Rendered on the lab page above
+   * the embedded content.
+   */
+  about?: string[];
 }
 
 export interface Course {
@@ -31,6 +37,10 @@ export const courses: Course[] = [
         title: 'EC2',
         summary: 'מעבדה מעשית להקמה, חיבור וניהול של מכונות וירטואליות ב-EC2.',
         embedPath: '/labs/ec2/index.html',
+        about: [
+          'EC2 (‏Elastic Compute Cloud) הוא אחד השירותים המרכזיים ביותר ב-AWS. הוא מאפשר להקים ולהפעיל שרתים וירטואליים בענן ("מכונות" או Instances) תוך דקות, בלי לקנות או להחזיק חומרה פיזית משלכם. כמעט כל שירות שדורש שרת שרץ ברקע — מאתרי אינטרנט ועד מודלים של AI — בסופו של דבר רץ על מכונות מסוג הזה.',
+          'במעבדה האינטראקטיבית הזו תתרגלו את תהליך יצירת מכונת EC2 בדיוק כפי שהוא נראה במסוף האמיתי של AWS: בחירת מערכת הפעלה (AMI), סוג מכונה, מפתח התחברות, הגדרות רשת ואבטחה, ונפח אחסון. לכל שלב מצורף הסבר קופץ שמתאר מה הוא עושה ולמה הוא חשוב, כך שאפשר ללמוד תוך כדי עשייה — בסביבה מדומה שאינה מחוברת לחשבון AWS אמיתי וללא שום עלות.',
+        ],
       },
     ],
   },

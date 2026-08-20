@@ -35,6 +35,7 @@ export default function NameAndTags({ state, setState }) {
             value={state.name}
             placeholder="My-instance"
             onChange={(e) => setState((s) => ({ ...s, name: e.detail.value }))}
+            nativeInputAttributes={{ dir: 'auto' }}
           />
         </FormField>
 
@@ -42,8 +43,18 @@ export default function NameAndTags({ state, setState }) {
           <SpaceBetween size="xs">
             {tags.map((tag, i) => (
               <SpaceBetween key={i} direction="horizontal" size="xs" alignItems="center">
-                <Input placeholder="Key" value={tag.key} onChange={(e) => updateTag(i, 'key', e.detail.value)} />
-                <Input placeholder="Value" value={tag.value} onChange={(e) => updateTag(i, 'value', e.detail.value)} />
+                <Input
+                  placeholder="Key"
+                  value={tag.key}
+                  onChange={(e) => updateTag(i, 'key', e.detail.value)}
+                  nativeInputAttributes={{ dir: 'auto' }}
+                />
+                <Input
+                  placeholder="Value"
+                  value={tag.value}
+                  onChange={(e) => updateTag(i, 'value', e.detail.value)}
+                  nativeInputAttributes={{ dir: 'auto' }}
+                />
                 <Button iconName="close" variant="icon" onClick={() => removeTag(i)} ariaLabel="Remove tag" />
               </SpaceBetween>
             ))}

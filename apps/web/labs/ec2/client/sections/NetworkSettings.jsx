@@ -80,12 +80,14 @@ export default function NetworkSettings({ state, setState }) {
                   <Input
                     value={state.securityGroupName}
                     onChange={(e) => setState((s) => ({ ...s, securityGroupName: e.detail.value }))}
+                    nativeInputAttributes={{ dir: 'auto' }}
                   />
                 </FormField>
                 <FormField label="Description">
                   <Input
                     value={state.securityGroupDescription}
                     onChange={(e) => setState((s) => ({ ...s, securityGroupDescription: e.detail.value }))}
+                    nativeInputAttributes={{ dir: 'auto' }}
                   />
                 </FormField>
               </ColumnLayout>
