@@ -93,6 +93,7 @@ export function LabEmbed({ src, title }: LabEmbedProps) {
           src={src}
           title={title}
           loading="lazy"
+          sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
           className={cn('w-full border-0', isFullscreen ? 'h-screen' : 'h-[85vh] min-h-[720px]')}
         />
       </div>
