@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 const rubik = Rubik({ subsets: ['latin', 'hebrew'], variable: '--font-sans' });
 
 export const metadata = {
-  title: 'FlipTheScript Academy',
+  title: 'FlipTheScript Labs',
   description:
     'קורסים ומעבדות בחינם ללימוד DevOps ו-AWS, שנבנים על ידי קהילת FlipTheScript.',
 };

@@ -4,7 +4,7 @@ export function SiteFooter() {
       <div className="gradient-divider mb-8" />
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-muted-foreground sm:flex-row">
         <span>
-          Flip<span className="text-primary">TheScript</span> Academy
+          Flip<span className="text-primary">TheScript</span> Labs
         </span>
         <a
           href="https://github.com/FlipTheScriptCommunity"

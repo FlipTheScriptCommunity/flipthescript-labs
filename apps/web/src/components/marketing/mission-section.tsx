@@ -6,7 +6,7 @@ export function MissionSection() {
       </h2>
 
       <p className="mx-auto mt-6 max-w-2xl text-center text-lg text-muted-foreground">
-        FlipTheScript Academy הוא לא סתם עוד פלטפורמת לימוד. הקורסים,
+        FlipTheScript Labs הוא לא סתם עוד פלטפורמת לימוד. הקורסים,
         המעבדות והתשתית שמאחוריהם נבנים על ידי חברי קהילה — מפתחים, מהנדסי
         DevOps ואנשי ענן — שעושים את זה כדי ללמוד, להתנסות בכלים חדשים
         ולצבור ניסיון מעשי אמיתי, בדיוק כמו התלמידים שישתמשו בתוצר.

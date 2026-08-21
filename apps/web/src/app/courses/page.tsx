@@ -4,7 +4,7 @@ import { SiteFooter } from '@/components/marketing/site-footer';
 import { courses } from '@/data/courses';
 
 export const metadata = {
-  title: 'קורסים | FlipTheScript Academy',
+  title: 'קורסים | FlipTheScript Labs',
 };
 
 export default function CoursesPage() {

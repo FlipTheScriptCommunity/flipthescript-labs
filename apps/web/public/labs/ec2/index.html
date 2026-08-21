@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Launch an instance | EC2 Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/labs/ec2/bundle.css" />
+</head>
+<body>
+  <!--
+    dir="ltr" is hardcoded here on purpose, not left to inherit from <html>.
+    The tutorial's welcome popup (a Cloudscape <Modal>) needs the *document*
+    root's dir toggled to rtl while it's open, because Cloudscape portals the
+    modal's real DOM to a node it appends directly under <body> — outside
+    this div — so nothing scoped to #app or below can reach it (see
+    TutorialOverlay.jsx). Without an explicit dir here, that html-level
+    toggle would inherit straight down into the AWS console too and mirror
+    its entire layout into RTL, which must never happen. An explicit dir on
+    this element stops inheritance cold for everything under it, regardless
+    of what <html> is doing above.
+  -->
+  <div id="app" dir="ltr"></div>
+  <script src="/labs/ec2/bundle.js"></script>
+</body>
+</html>

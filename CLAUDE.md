@@ -6,13 +6,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 FlipTheScript Academy — an Nx monorepo using Bun as the package manager and script runner.
 
-- **Frontend** (`apps/web`): Next.js 16 (App Router) + shadcn/ui + Tailwind CSS v4, deployed to Cloudflare Pages today (AWS later). RTL Hebrew UI (`dir="rtl"`, `lang="he"`), dark "cyber" theme documented in `apps/web/docs/FlipTheScript_Design_Guidelines.md`.
+- **Frontend** (`apps/web`): Next.js 16 (App Router) + shadcn/ui + Tailwind CSS v4, deployed to Vercel. RTL Hebrew UI (`dir="rtl"`, `lang="he"`), dark "cyber" theme documented in `apps/web/docs/FlipTheScript_Design_Guidelines.md`.
 - **Backend** (`apps/api`): AWS Lambda handlers written in TypeScript, bundled individually with esbuild.
 - **Database**: Amazon DynamoDB, accessed only through `libs/dynamo-client` (a shared `DynamoDBDocumentClient` wrapper, reused across Lambda invocations — never instantiate a new client elsewhere).
 - **Shared types**: `libs/shared-types` holds DTOs (e.g. `Course`, `User`) shared between `apps/web` and `apps/api`.
 - **Infrastructure** (`infra/cdk`): AWS CDK (TypeScript) app provisioning DynamoDB tables (`DataStack`), and Lambda functions + HTTP API (`ApiStack`, which takes the table from `DataStack` as a prop). Entry point: `infra/cdk/bin/app.ts`.
 
 Current state: the API only exposes `GET /health` and `GET /courses` (a DynamoDB scan of a single `flipthescript-academy-courses` table). The `apps/web` frontend courses/labs content is currently static data (`apps/web/src/data/courses.ts`), not yet wired to the API.
+
+## Branding conventions
+
+- The product is named **FlipTheScript Labs** — never "Academy". Update all UI text, page titles, and metadata accordingly.
+- The site header logo (`SiteHeader` in `apps/web/src/components/marketing/site-header.tsx`) must always link to `/` (the homepage).
 
 ## Commands
 
@@ -37,7 +42,6 @@ bunx nx test api -- health.spec.ts
 bunx nx test api -- -t "returns a 200 status"
 ```
 
-Web app targets also include `pages:build` (Cloudflare Pages build via `next-on-pages`).
 
 ### Deploying infrastructure (AWS CDK)
 
@@ -48,12 +52,11 @@ bunx cdk diff
 bunx cdk deploy --all
 ```
 
-### Deploying the web app (Cloudflare Pages)
+### Deploying the web app (Vercel)
 
 ```sh
-cd apps/web
-bun run pages:build
-bunx wrangler pages deploy .vercel/output/static
+vercel        # preview deployment
+vercel --prod # production deployment
 ```
 
 ## Architecture notes
