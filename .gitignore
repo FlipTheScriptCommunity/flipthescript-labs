@@ -64,3 +64,9 @@ infra/cdk/.cdk.staging
 
 vite.config.*.timestamp*
 vitest.config.*.timestamp*
+# Cloudflare / OpenNext
+.open-next
+.wrangler
+.dev.vars
+.dev.vars.*
+!.dev.vars.example

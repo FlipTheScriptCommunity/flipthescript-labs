@@ -7,6 +7,18 @@ export default [
   ...nx.configs['flat/react-typescript'],
   ...baseConfig,
   {
-    ignores: ['.next/**/*', '**/out-tsc'],
+    ignores: [
+      '.next/**/*',
+      // OpenNext Cloudflare adapter output (generated bundles).
+      '.open-next/**/*',
+      '.wrangler/**/*',
+      '**/out-tsc',
+      // Static assets, including the pre-built lab bundles produced by
+      // `labs/<labId>/build.js` — generated code, not ours to lint.
+      'public/**/*',
+      // Standalone lab sources are their own Nx projects with their own deps
+      // and eslint config (labs/<labId>/eslint.config.mjs).
+      'labs/**/*',
+    ],
   },
 ];

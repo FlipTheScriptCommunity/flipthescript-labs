@@ -1,0 +1,4 @@
+# Build output of the OpenNext Cloudflare adapter (apps/web) — generated, and big
+# enough to slow down Nx hashing and pollute lint/format if it is ever scanned.
+**/.open-next
+**/.wrangler

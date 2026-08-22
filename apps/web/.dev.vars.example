@@ -1,0 +1,3 @@
+# Copy to .dev.vars for `nx preview web` (the local workerd runtime).
+# Values here are only used by the Worker at runtime, not at build time.
+NEXTJS_ENV=development
