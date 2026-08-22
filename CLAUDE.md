@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 FlipTheScript Academy — an Nx monorepo using Bun as the package manager and script runner.
 
-- **Frontend** (`apps/web`): Next.js 16 (App Router) + shadcn/ui + Tailwind CSS v4, deployed to Vercel. RTL Hebrew UI (`dir="rtl"`, `lang="he"`), dark "cyber" theme documented in `apps/web/docs/FlipTheScript_Design_Guidelines.md`.
+- **Frontend** (`apps/web`): Next.js 16 (App Router) + shadcn/ui + Tailwind CSS v4, deployed to Cloudflare Workers via the OpenNext adapter (`@opennextjs/cloudflare`). RTL Hebrew UI (`dir="rtl"`, `lang="he"`), dark "cyber" theme documented in `apps/web/docs/FlipTheScript_Design_Guidelines.md`.
 - **Backend** (`apps/api`): AWS Lambda handlers written in TypeScript, bundled individually with esbuild.
 - **Database**: Amazon DynamoDB, accessed only through `libs/dynamo-client` (a shared `DynamoDBDocumentClient` wrapper, reused across Lambda invocations — never instantiate a new client elsewhere).
 - **Shared types**: `libs/shared-types` holds DTOs (e.g. `Course`, `User`) shared between `apps/web` and `apps/api`.
@@ -37,11 +37,11 @@ bunx nx graph                        # view the project graph
 ```
 
 To run a single test file/case, use vitest's own filtering through the Nx target, e.g.:
+
 ```sh
 bunx nx test api -- health.spec.ts
 bunx nx test api -- -t "returns a 200 status"
 ```
-
 
 ### Deploying infrastructure (AWS CDK)
 
@@ -52,12 +52,26 @@ bunx cdk diff
 bunx cdk deploy --all
 ```
 
-### Deploying the web app (Vercel)
+### Deploying the web app (Cloudflare Workers)
+
+`apps/web` uses the OpenNext Cloudflare adapter — `apps/web/wrangler.jsonc` +
+`apps/web/open-next.config.ts`. `next.config.js` must keep `output: 'standalone'`
+and `outputFileTracingRoot` pointing at the workspace root; the adapter packages
+`.next/standalone`, and the Nx `build` target is what produces it (the cf targets
+run with `--skipNextBuild`).
 
 ```sh
-vercel        # preview deployment
-vercel --prod # production deployment
+bunx nx cf:build web   # build the Worker bundle into apps/web/.open-next
+bunx nx preview web    # run it locally in workerd
+bunx nx deploy web     # build + deploy to Cloudflare
 ```
+
+Continuous deployment is Cloudflare Workers Builds (dashboard Git integration),
+not GitHub Actions — deliberately, so the repo holds no Cloudflare credentials and
+outside contributors are not blocked by CI secrets. Cloudflare runs
+`bunx nx cf:build web` from the repo root, then `bunx nx cf:deploy web` on `main`
+or `bunx nx cf:upload web` on other branches. `NEXT_PUBLIC_*` is inlined at build
+time, so it is a dashboard **build** variable, not a Worker runtime variable.
 
 ## Architecture notes
 

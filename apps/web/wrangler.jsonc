@@ -1,0 +1,35 @@
+/**
+ * Cloudflare Workers configuration for the FlipTheScript Labs web app.
+ *
+ * The app is built with the OpenNext Cloudflare adapter (@opennextjs/cloudflare),
+ * which compiles the Next.js output into a Worker (.open-next/worker.js) plus a
+ * static asset manifest (.open-next/assets).
+ *
+ *   bunx nx preview web   # build + run the Worker locally (workerd)
+ *   bunx nx deploy web    # build + deploy to Cloudflare
+ */
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "flipthescript-labs-web",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-08-22",
+  // nodejs_compat is required by the adapter; global_fetch_strictly_public makes
+  // same-origin fetches from server code go back through the public URL, which is
+  // what Next.js expects.
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+  },
+  // Required by the adapter so the Worker can call itself (used for revalidation
+  // and cache purges). Must point at this Worker's own name.
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "flipthescript-labs-web",
+    },
+  ],
+  "observability": {
+    "enabled": true,
+  },
+}

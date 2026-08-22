@@ -8,6 +8,8 @@ export default [
     ignores: [
       '**/dist',
       '**/out-tsc',
+      '**/.open-next',
+      '**/.wrangler',
       '**/cdk.out',
       '**/vite.config.*.timestamp*',
       '**/vitest.config.*.timestamp*',
