@@ -78,7 +78,11 @@ export function SiteHeader() {
         </nav>
 
         {/* Last child = leftmost under dir="rtl", per the logo-on-the-left request. */}
-        <Link href="/" className="text-xl font-black" onClick={() => setIsMenuOpen(false)}>
+        <Link
+          href="/"
+          className="text-xl font-black"
+          onClick={() => setIsMenuOpen(false)}
+        >
           Flip<span className="text-primary">TheScript</span>
         </Link>
       </div>

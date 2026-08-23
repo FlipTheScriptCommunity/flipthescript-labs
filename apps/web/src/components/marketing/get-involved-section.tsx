@@ -11,7 +11,11 @@ export function GetInvolvedSection() {
         </p>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button size="lg" className="px-6 text-base font-extrabold" render={<Link href="/courses" />}>
+          <Button
+            size="lg"
+            className="px-6 text-base font-extrabold"
+            render={<Link href="/courses" />}
+          >
             להתחיל ללמוד
           </Button>
           <Button size="lg" variant="secondary" className="px-6 text-base">
