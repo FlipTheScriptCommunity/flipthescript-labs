@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  floci:
+    image: floci/floci:latest
+    container_name: floci
+    ports:
+      - '127.0.0.1:4566:4566'
+    # Lambda needs the Docker socket; this grants the container host-level Docker access.
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped

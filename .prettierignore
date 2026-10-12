@@ -6,3 +6,4 @@
 .nx/self-healing
 **/.open-next
 **/.wrangler
+templates/*/node_modules

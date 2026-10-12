@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ענן על המחשב שלך</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    />
+
+    <style>
+      :root {
+        --ground: #edf3f5;
+        --surface: #ffffff;
+        --surface-2: #dfeaee;
+        --ink: #10202a;
+        --ink-2: #3b5261;
+        --muted: #6a828f;
+        --rule: #cbdbe1;
+
+        --sky: #0e7c86; /* מקומי · חינם */
+        --sky-soft: #d8eef0;
+        --on-sky: #ffffff;
+        --sun: #c2600c; /* אמיתי · עולה כסף */
+        --sun-soft: #fcebd9;
+
+        --shadow:
+          0 2px 4px rgba(16, 32, 42, 0.05),
+          0 14px 34px -18px rgba(16, 32, 42, 0.28);
+        --shadow-lg:
+          0 4px 8px rgba(16, 32, 42, 0.06),
+          0 26px 56px -24px rgba(16, 32, 42, 0.34);
+
+        --display: 'Secular One', 'Arial Hebrew', Arial, sans-serif;
+        --body: 'Assistant', 'Arial Hebrew', Arial, sans-serif;
+        --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme='light']) {
+          --ground: #0a141b;
+          --surface: #12212b;
+          --surface-2: #1b2e3a;
+          --ink: #e6f1f5;
+          --ink-2: #b0c7d1;
+          --muted: #7f98a5;
+          --rule: #243b48;
+
+          --sky: #45c3cd;
+          --sky-soft: #0e3238;
+          --on-sky: #08171c;
+          --sun: #f0a03c;
+          --sun-soft: #38260f;
+
+          --shadow:
+            0 2px 4px rgba(0, 0, 0, 0.4), 0 14px 34px -18px rgba(0, 0, 0, 0.75);
+          --shadow-lg:
+            0 4px 8px rgba(0, 0, 0, 0.45), 0 26px 56px -24px rgba(0, 0, 0, 0.8);
+        }
+      }
+
+      :root[data-theme='dark'] {
+        --ground: #0a141b;
+        --surface: #12212b;
+        --surface-2: #1b2e3a;
+        --ink: #e6f1f5;
+        --ink-2: #b0c7d1;
+        --muted: #7f98a5;
+        --rule: #243b48;
+
+        --sky: #45c3cd;
+        --sky-soft: #0e3238;
+        --on-sky: #08171c;
+        --sun: #f0a03c;
+        --sun-soft: #38260f;
+
+        --shadow:
+          0 2px 4px rgba(0, 0, 0, 0.4), 0 14px 34px -18px rgba(0, 0, 0, 0.75);
+        --shadow-lg:
+          0 4px 8px rgba(0, 0, 0, 0.45), 0 26px 56px -24px rgba(0, 0, 0, 0.8);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--ground);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 19px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        text-align: right;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 64px 24px 110px;
+        display: flex;
+        flex-direction: column;
+        gap: 76px;
+      }
+
+      /* ── כותרת ─────────────────────────────────────────── */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-family: var(--display);
+        font-size: clamp(2.6rem, 8vw, 4.4rem);
+        line-height: 1.08;
+        margin: 0;
+        color: var(--ink);
+        text-wrap: balance;
+      }
+
+      .hero .sub {
+        font-size: 1.2rem;
+        color: var(--ink-2);
+        max-width: 30ch;
+        margin: 0;
+        text-wrap: balance;
+      }
+
+      .badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 6px;
+      }
+      .badge {
+        font-size: 0.88rem;
+        font-weight: 600;
+        background: var(--sky-soft);
+        color: var(--sky);
+        padding: 6px 14px;
+        border-radius: 999px;
+      }
+
+      /* ── בלוקים ────────────────────────────────────────── */
+      section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      h2 {
+        font-family: var(--display);
+        font-size: clamp(1.6rem, 4.4vw, 2.3rem);
+        line-height: 1.2;
+        margin: 0;
+        text-wrap: balance;
+      }
+
+      .lead {
+        font-size: 1.08rem;
+        color: var(--ink-2);
+        max-width: 46ch;
+        margin: 0;
+      }
+      p {
+        margin: 0;
+      }
+
+      /* ── איורים ────────────────────────────────────────── */
+      figure {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .fig {
+        background: var(--surface);
+        border: 1px solid var(--rule);
+        border-radius: 18px;
+        padding: 24px 18px;
+        overflow-x: auto;
+        box-shadow: var(--shadow);
+      }
+      .fig svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        min-width: 560px;
+        color: var(--ink-2);
+      }
+      figcaption {
+        font-size: 0.93rem;
+        color: var(--muted);
+        text-align: center;
+      }
+
+      /* ── שלבים ─────────────────────────────────────────── */
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+
+      .step {
+        background: var(--surface);
+        border: 1px solid var(--rule);
+        border-radius: 18px;
+        padding: 26px;
+        display: grid;
+        grid-template-columns: 62px 1fr;
+        gap: 20px;
+        align-items: start;
+        box-shadow: var(--shadow);
+      }
+
+      .num {
+        width: 62px;
+        height: 62px;
+        border-radius: 50%;
+        background: var(--sky);
+        color: var(--on-sky);
+        font-family: var(--display);
+        font-size: 1.9rem;
+        display: grid;
+        place-items: center;
+        line-height: 1;
+      }
+
+      .step-body {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-width: 0;
+      }
+      .step-body h3 {
+        font-family: var(--display);
+        font-size: 1.35rem;
+        margin: 0;
+        line-height: 1.25;
+      }
+      .step-body p {
+        color: var(--ink-2);
+        font-size: 1rem;
+        max-width: 48ch;
+      }
+
+      /* ── קוד ───────────────────────────────────────────── */
+      pre {
+        direction: ltr;
+        text-align: left;
+        font-family: var(--mono);
+        font-size: 14.5px;
+        line-height: 1.75;
+        background: var(--surface-2);
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin: 0;
+        overflow-x: auto;
+        color: var(--ink);
+      }
+      pre .c {
+        color: var(--muted);
+      }
+      code {
+        direction: ltr;
+        unicode-bidi: embed;
+        font-family: var(--mono);
+        font-size: 0.86em;
+        background: var(--surface-2);
+        padding: 0.12em 0.4em;
+        border-radius: 5px;
+      }
+
+      .hint {
+        font-size: 0.92rem;
+        color: var(--muted);
+        background: var(--surface-2);
+        border-radius: 10px;
+        padding: 10px 14px;
+      }
+
+      /* ── כרטיסיות שירותים ──────────────────────────────── */
+      .grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+      .chip {
+        background: var(--surface);
+        border: 1px solid var(--rule);
+        border-radius: 14px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        box-shadow: var(--shadow);
+      }
+      .chip b {
+        font-family: var(--mono);
+        font-size: 0.9rem;
+        color: var(--sky);
+        direction: ltr;
+      }
+      .chip span {
+        font-size: 0.92rem;
+        color: var(--ink-2);
+      }
+
+      /* ── שאלות ─────────────────────────────────────────── */
+      .qa {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .q {
+        background: var(--surface);
+        border: 1px solid var(--rule);
+        border-radius: 14px;
+        padding: 18px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        box-shadow: var(--shadow);
+      }
+      .q b {
+        font-family: var(--display);
+        font-size: 1.05rem;
+        font-weight: 400;
+      }
+      .q span {
+        color: var(--ink-2);
+        font-size: 0.98rem;
+      }
+
+      .end {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.9rem;
+        border-top: 1px solid var(--rule);
+        padding-top: 22px;
+      }
+      .end a {
+        color: var(--sky);
+      }
+
+      @media (max-width: 560px) {
+        body {
+          font-size: 18px;
+        }
+        .wrap {
+          padding: 44px 18px 72px;
+          gap: 56px;
+        }
+        .step {
+          grid-template-columns: 48px 1fr;
+          gap: 14px;
+          padding: 20px;
+        }
+        .num {
+          width: 48px;
+          height: 48px;
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- ═══════════════════════════════ כותרת ═══ -->
+      <header class="hero">
+        <h1>ענן על המחשב שלך</h1>
+        <p class="sub">
+          להתחיל עם Floci בעשר דקות — בלי חשבון AWS, בלי כרטיס אשראי, בלי לשלם
+          שקל.
+        </p>
+        <div class="badges">
+          <span class="badge">חינם לגמרי</span>
+          <span class="badge">עובד בלי אינטרנט</span>
+          <span class="badge">אי אפשר לשבור כלום</span>
+        </div>
+      </header>
+
+      <!-- ═══════════════════════════════ מה זה ═══ -->
+      <section>
+        <h2>רגע, מה זה בכלל?</h2>
+        <p class="lead">
+          &ldquo;ענן&rdquo; זה בסך הכל מחשבים של מישהו אחר, רחוק. Floci מריץ
+          העתק קטן שלהם — אצלך.
+        </p>
+
+        <figure>
+          <div class="fig">
+            <svg
+              viewBox="0 0 760 300"
+              role="img"
+              aria-label="השוואה: מצד ימין הענן האמיתי של אמזון, רחוק, דורש חשבון וכרטיס אשראי ואינטרנט ועולה כסף. מצד שמאל המחשב שלך, שבתוכו רץ Floci, בלי חשבון, בלי אינטרנט, בחינם."
+            >
+              <!-- ימין: הענן האמיתי -->
+              <text
+                x="600"
+                y="30"
+                text-anchor="middle"
+                font-family="var(--display)"
+                font-size="19"
+                fill="var(--sun)"
+              >
+                הענן האמיתי
+              </text>
+
+              <path
+                d="M 528 118 a 30 30 0 0 1 30 -30 a 40 40 0 0 1 76 8 a 26 26 0 0 1 -6 51 h -70 a 30 30 0 0 1 -30 -29 z"
+                fill="var(--sun-soft)"
+                stroke="var(--sun)"
+                stroke-width="2.5"
+              />
+              <text
+                x="592"
+                y="126"
+                text-anchor="middle"
+                font-family="var(--mono)"
+                font-size="15"
+                font-weight="700"
+                fill="var(--sun)"
+              >
+                AWS
+              </text>
+
+              <text
+                x="672"
+                y="182"
+                text-anchor="start"
+                font-family="var(--body)"
+                font-size="14"
+                fill="var(--ink-2)"
+              >
+                צריך חשבון וכרטיס אשראי
+              </text>
+              <text
+                x="672"
+                y="208"
+                text-anchor="start"
+                font-family="var(--body)"
+                font-size="14"
+                fill="var(--ink-2)"
+              >
+                צריך אינטרנט
+              </text>
+              <text
+                x="672"
+                y="234"
+                text-anchor="start"
+                font-family="var(--body)"
+                font-size="14"
+                fill="var(--ink-2)"
+              >
+                עולה כסף לפי שימוש
+              </text>
+              <text
+                x="672"
+                y="260"
+                text-anchor="start"
+                font-family="var(--body)"
+                font-size="14"
+                fill="var(--ink-2)"
+              >
+                טעות = חשבונית
+              </text>
+
+              <!-- קו הפרדה -->
+              <line
+                x1="400"
+                y1="46"
+                x2="400"
+                y2="272"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-dasharray="5 6"
+                opacity=".35"
+              />
+
+              <!-- שמאל: המחשב שלך -->
+              <text
+                x="200"
+                y="30"
+                text-anchor="middle"
+                font-family="var(--display)"
+                font-size="19"
+                fill="var(--sky)"
+              >
+                המחשב שלך
+              </text>
+
+              <rect
+                x="96"
+                y="62"
+                width="208"
+                height="128"
+                rx="12"
+                fill="none"
+                stroke="var(--sky)"
+                stroke-width="2.5"
+              />
+              <rect
+                x="140"
+                y="190"
+                width="120"
+                height="9"
+                rx="4"
+                fill="var(--sky)"
+              />
+              <rect
+                x="112"
+                y="199"
+                width="176"
+                height="7"
+                rx="3.5"
+                fill="var(--sky)"
+                opacity=".55"
+              />
+
+              <path
+                d="M 152 136 a 21 21 0 0 1 21 -21 a 28 28 0 0 1 53 6 a 18 18 0 0 1 -4 35 h -49 a 21 21 0 0 1 -21 -20 z"
+                fill="var(--sky-soft)"
+                stroke="var(--sky)"
+                stroke-width="2.5"
+              />
+              <text
+                x="197"
+                y="142"
+                text-anchor="middle"
+                font-family="var(--mono)"
+                font-size="13"
+                font-weight="700"
+                fill="var(--sky)"
+              >
+                floci
+              </text>
+
+              <text
+                x="128"
+                y="238"
+                text-anchor="end"
+                font-family="var(--body)"
+                font-size="14"
+                fill="var(--ink-2)"
+              >
+                בלי חשבון, בלי כרטיס
+              </text>
+              <text
+                x="128"
+                y="264"
+                text-anchor="end"
+                font-family="var(--body)"
+                font-size="14"
+                fill="var(--ink-2)"
+              >
+                עובד גם במטוס · חינם
+              </text>
+            </svg>
+          </div>
+          <figcaption>
+            אותם שירותים, אותן פקודות — רק שהכל קורה אצלך במחשב.
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ═══════════════════════════════ הרעיון ═══ -->
+      <section>
+        <h2>הרעיון היחיד שצריך להבין</h2>
+        <p class="lead">
+          לכל פקודה שאתה שולח לענן יש <strong>כתובת</strong>. משנים את הכתובת —
+          והפקודה מגיעה למחשב שלך במקום לאמזון.
+          <strong>הפקודה עצמה לא משתנה בכלל.</strong>
+        </p>
+
+        <figure>
+          <div class="fig">
+            <svg
+              viewBox="0 0 760 260"
+              role="img"
+              aria-label="אותה פקודה בדיוק, aws s3 mb, נשלחת פעמיים. בשורה העליונה היא הולכת לכתובת של אמזון ומגיעה לענן האמיתי שעולה כסף. בשורה התחתונה היא הולכת לכתובת localhost ארבעת אלפים חמש מאות שישים ושש ומגיעה ל-Floci שרץ על המחשב, בחינם. רק תיבת הכתובת באמצע שונה."
+            >
+              <defs>
+                <marker
+                  id="a-sun"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="7"
+                  markerHeight="7"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--sun)" />
+                </marker>
+                <marker
+                  id="a-sky"
+                  viewBox="0 0 10 10"
+                  refX="9"
+                  refY="5"
+                  markerWidth="7"
+                  markerHeight="7"
+                  orient="auto-start-reverse"
+                >
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--sky)" />
+                </marker>
+              </defs>
+
+              <!-- שורה 1 -->
+              <rect
+                x="556"
+                y="42"
+                width="182"
+                height="56"
+                rx="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <text
+                x="647"
+                y="66"
+                text-anchor="middle"
+                font-family="var(--body)"
+                font-size="13"
+                fill="var(--muted)"
+              >
+                הפקודה שלך
+              </text>
+              <text
+                x="647"
+                y="86"
+                text-anchor="middle"
+                font-family="var(--mono)"
+                font-size="13.5"
+                font-weight="700"
+                fill="currentColor"
+              >
+                aws s3 mb
+              </text>
+
+              <line
+                x1="552"
+                y1="70"
+                x2="502"
+                y2="70"
+                stroke="var(--sun)"
+                stroke-width="2.2"
+                marker-end="url(#a-sun)"
+              />
+
+              <rect
+                x="316"
+                y="42"
+                width="182"
+                height="56"
+                rx="11"
+                fill="var(--sun-soft)"
+                stroke="var(--sun)"
+                stroke-width="2.5"
+              />
+              <text
+                x="407"
+                y="66"
+                text-anchor="middle"
+                font-family="var(--body)"
+                font-size="13"
+                fill="var(--sun)"
+              >
+                כתובת
+              </text>
+              <text
+                x="407"
+                y="86"
+                text-anchor="middle"
+                font-family="var(--mono)"
+                font-size="12.5"
+                font-weight="700"
+                fill="var(--sun)"
+              >
+                amazonaws.com
+              </text>
+
+              <line
+                x1="312"
+                y1="70"
+                x2="262"
+                y2="70"
+                stroke="var(--sun)"
+                stroke-width="2.2"
+                marker-end="url(#a-sun)"
+              />
+
+              <rect
+                x="76"
+                y="42"
+                width="182"
+                height="56"
+                rx="11"
+                fill="none"
+                stroke="var(--sun)"
+                stroke-width="2"
+              />
+              <text
+                x="167"
+                y="66"
+                text-anchor="middle"
+                font-family="var(--body)"
+                font-size="13.5"
+                fill="var(--sun)"
+              >
+                הענן האמיתי
+              </text>
+              <text
+                x="167"
+                y="86"
+                text-anchor="middle"
+                font-family="var(--body)"
+                font-size="12.5"
+                fill="var(--sun)"
+              >
+                עולה כסף
+              </text>
+
+              <!-- שורה 2 -->
+              <rect
+                x="556"
+                y="162"
+                width="182"
+                height="56"
+                rx="11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <text
+                x="647"
+                y="186"
+                text-anchor="middle"
+                font-family="var(--body)"
+                font-size="13"
+                fill="var(--muted)"
+              >
+                אותה פקודה בדיוק
+              </text>
+              <text
+                x="647"
+                y="206"
+                text-anchor="middle"
+                font-family="var(--mono)"
+                font-size="13.5"
+                font-weight="700"
+                fill="currentColor"
+              >
+                aws s3 mb
+              </text>
+
+              <line
+                x1="552"
+                y1="190"
+                x2="502"
+                y2="190"
+                stroke="var(--sky)"
+                stroke-width="2.2"
+                marker-end="url(#a-sky)"
+              />
+
+              <rect
+                x="316"
+                y="162"
+                width="182"
+                height="56"
+                rx="11"
+                fill="var(--sky-soft)"
+                stroke="var(--sky)"
+                stroke-width="2.5"
+              />
+              <text
+                x="407"
+                y="186"
+                text-anchor="middle"
+                font-family="var(--body)"
+                font-size="13"
+                fill="var(--sky)"
+              >
+                כתובת
+              </text>
+              <text
+                x="407"
+                y="206"
+                text-anchor="middle"
+                font-family="var(--mono)"
+                font-size="12.5"
+                font-weight="700"
+                fill="var(--sky)"
+              >
+                localhost:4566
+              </text>
+
+              <line
+                x1="312"
+                y1="190"
+                x2="262"
+                y2="190"
+                stroke="var(--sky)"
+                stroke-width="2.2"
+                marker-end="url(#a-sky)"
+              />
+
+              <rect
+                x="76"
+                y="162"
+                width="182"
+                height="56"
+                rx="11"
+                fill="none"
+                stroke="var(--sky)"
+                stroke-width="2"
+              />
+              <text
+                x="167"
+                y="186"
+                text-anchor="middle"
+                font-family="var(--body)"
+                font-size="13.5"
+                fill="var(--sky)"
+              >
+                Floci אצלך
+              </text>
+              <text
+                x="167"
+                y="206"
+                text-anchor="middle"
+                font-family="var(--body)"
+                font-size="12.5"
+                fill="var(--sky)"
+              >
+                חינם
+              </text>
+
+              <!-- ההדגשה -->
+              <text
+                x="407"
+                y="136"
+                text-anchor="middle"
+                font-family="var(--display)"
+                font-size="15"
+                fill="currentColor"
+              >
+                רק זה משתנה ↑↓
+              </text>
+            </svg>
+          </div>
+          <figcaption>זה כל הקסם. שורה אחת של כתובת.</figcaption>
+        </figure>
+      </section>
+
+      <!-- ═══════════════════════════════ התחלה מהירה ═══ -->
+      <section>
+        <h2>התחלה מהירה (דקה אחת)</h2>
+        <p class="lead">צריך רק Docker. כל השאר הוא אוטומטי.</p>
+
+        <div class="steps">
+          <article class="step">
+            <div class="num">1</div>
+            <div class="step-body">
+              <h3>מתקינים Docker</h3>
+              <p>
+                מורידים מ־<a
+                  href="https://docker.com/products/docker-desktop"
+                  style="color: var(--sky)"
+                  >docker.com</a
+                >, מתקינים, פותחים.
+              </p>
+              <div class="hint">אם כבר יש Docker, דלגו לשלב 2.</div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">2</div>
+            <div class="step-body">
+              <h3>בפקודה אחת</h3>
+              <p>Clone את ה-repo, נכנסו לתוכו, והריצו את הסקריפט הזה:</p>
+              <pre><code><span class="c"># Mac / Linux</span>
+./setup-floci.sh</code></pre>
+              <pre><code><span class="c"># Windows</span>
+setup-floci.bat</code></pre>
+              <div class="hint">
+                הסקריפט מעלה את Floci, מוריד את התוכנה בפעם הראשונה, וקובע את כל
+                ה-env vars. זה הכל.
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">3</div>
+            <div class="step-body">
+              <h3>טסטו</h3>
+              <p><em>Bucket</em> זו תיקייה בענן. בדקו שהכל עובד:</p>
+              <pre><code>set -a; source .env.floci; set +a  <span class="c"># Mac/Linux</span>
+aws s3 mb s3://my-test-bucket
+aws s3 ls</code></pre>
+              <div class="hint">רואים את השם ברשימה? מוכנים! 🎉</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════ שלבים ידניים ═══ -->
+      <section>
+        <h2>שלבים ידניים (אם אתם רוצים להבין כל דבר)</h2>
+        <p class="lead">
+          כך קורה בצד הקלעים כשאתם מריצים את הסקריפט. שימוש — אם אתם אוהבים
+          בניית דברים ידני או למידה עמוקה.
+        </p>
+
+        <div class="steps">
+          <article class="step">
+            <div class="num">1</div>
+            <div class="step-body">
+              <h3>מתקינים Docker</h3>
+              <p>
+                Docker זו תוכנה שיודעת להריץ תוכנות אחרות בתוך
+                &ldquo;קופסה&rdquo; מבודדת. Floci רץ בקופסה כזו. מורידים מ־<a
+                  href="https://docker.com/products/docker-desktop"
+                  style="color: var(--sky)"
+                  >docker.com</a
+                >, מתקינים, פותחים.
+              </p>
+              <div class="hint">
+                בדקו שהוא עובד: <code>docker --version</code>
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">2</div>
+            <div class="step-body">
+              <h3>מרימים את Floci</h3>
+              <p>
+                פקודה אחת. בפעם הראשונה זה מוריד את התוכנה, אחר כך זה מיידי.
+              </p>
+              <pre><code>docker run -d --name floci -p 4566:4566 floci/floci</code></pre>
+              <div class="hint">
+                <code>-p 4566:4566</code> אומר: &ldquo;פתח את דלת מספר
+                4566&rdquo;. זו הכתובת מהאיור למעלה. (או השתמשו ב-<code
+                  >docker-compose.yml</code
+                >
+                שבפוקט.)
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">3</div>
+            <div class="step-body">
+              <h3>מפנים את הכתובת</h3>
+              <p>
+                אומרים ל-AWS CLI לשלוח הכל למחשב שלך. הסיסמאות מזויפות — Floci
+                לא בודק אותן.
+              </p>
+              <pre><code><span class="c"># Mac / Linux</span>
+export AWS_ENDPOINT_URL=http://localhost:4566
+export AWS_ACCESS_KEY_ID=test
+export AWS_SECRET_ACCESS_KEY=test
+export AWS_DEFAULT_REGION=us-east-1</code></pre>
+              <pre><code><span class="c"># Windows PowerShell</span>
+$env:AWS_ENDPOINT_URL="http://localhost:4566"
+$env:AWS_ACCESS_KEY_ID="test"
+$env:AWS_SECRET_ACCESS_KEY="test"
+$env:AWS_DEFAULT_REGION="us-east-1"</code></pre>
+              <div class="hint">
+                או: <code>set -a; source .env.floci; set +a</code> (אחרי שעתקתם את
+                <code>.env.floci.example</code>)
+              </div>
+            </div>
+          </article>
+
+          <article class="step">
+            <div class="num">4</div>
+            <div class="step-body">
+              <h3>יוצרים משהו</h3>
+              <p>
+                <em>Bucket</em> זו תיקייה בענן. הפקודה הזו יוצרת אחת — בדיוק
+                אותה פקודה שהיית מריץ מול AWS אמיתי.
+              </p>
+              <pre><code>aws s3 mb s3://my-first-bucket
+aws s3 ls</code></pre>
+              <div class="hint">
+                רואה את השם ברשימה? יש לך ענן עובד על המחשב. 🎉
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════ מה עוד ═══ -->
+      <section>
+        <h2>מה עוד אפשר?</h2>
+        <p class="lead">Floci מדמה 75 שירותים. אלה הנפוצים למתחילים:</p>
+
+        <div class="grid">
+          <div class="chip"><b>S3</b><span>קבצים ותיקיות</span></div>
+          <div class="chip"><b>DynamoDB</b><span>מסד נתונים</span></div>
+          <div class="chip"><b>SQS</b><span>תור הודעות</span></div>
+          <div class="chip"><b>Lambda</b><span>קוד שרץ בענן</span></div>
+          <div class="chip"><b>SNS</b><span>התראות</span></div>
+          <div class="chip"><b>IAM</b><span>הרשאות</span></div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════ שאלות ═══ -->
+      <section>
+        <h2>שאלות שכולם שואלים</h2>
+
+        <div class="qa">
+          <div class="q">
+            <b>זה באמת בחינם?</b>
+            <span
+              >כן. קוד פתוח ברישיון MIT, בלי הרשמה ובלי טוקן. הכל רץ אצלך.</span
+            >
+          </div>
+          <div class="q">
+            <b>אני יכול לשבור משהו?</b>
+            <span
+              >לא. אין קשר לחשבון AWS אמיתי. הכי גרוע — מוחקים את הקונטיינר
+              ומתחילים מחדש.</span
+            >
+          </div>
+          <div class="q">
+            <b>איפה הדברים שיצרתי?</b>
+            <span
+              >בזיכרון. מכבים את הקונטיינר — הכל נעלם. זו תכונה, לא באג: כל הרצה
+              מתחילה נקי.</span
+            >
+          </div>
+          <div class="q">
+            <b>איך עוצרים?</b>
+            <span
+              ><code>docker stop floci</code> ואם רוצים גם למחוק —
+              <code>docker rm floci</code>.</span
+            >
+          </div>
+          <div class="q">
+            <b>מה ההבדל מ-LocalStack?</b>
+            <span
+              >LocalStack התחילה לדרוש טוקן ב-2026. Floci עושה את אותו דבר בלי
+              הרשמה, ומתחיל ב-24 אלפיות שנייה.</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <p class="end">
+        Floci · קוד פתוח MIT · <a href="https://floci.io">floci.io</a>
+      </p>
+    </div>
+  </body>
+</html>
