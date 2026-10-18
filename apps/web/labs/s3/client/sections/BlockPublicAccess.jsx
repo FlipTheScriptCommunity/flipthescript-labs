@@ -44,30 +44,46 @@ export default function BlockPublicAccess({ state, setState }) {
       }
     >
       <SpaceBetween size="m">
-        <Checkbox checked={allBlocked} onChange={(e) => setAll(e.detail.checked)}>
+        <Checkbox
+          checked={allBlocked}
+          onChange={(e) => setAll(e.detail.checked)}
+        >
           <Box fontWeight="bold">Block all public access</Box>
         </Checkbox>
         <Box color="text-body-secondary" fontSize="body-s">
-          Turning this off may result in the bucket and the objects within becoming public. We recommend leaving all
-          four settings enabled unless you know you need to turn off one of them for a specific use case.
+          Turning this off may result in the bucket and the objects within
+          becoming public. We recommend leaving all four settings enabled unless
+          you know you need to turn off one of them for a specific use case.
         </Box>
 
         <SpaceBetween size="s">
           {BLOCK_PUBLIC_ACCESS_OPTIONS.map((opt) => (
-            <Checkbox key={opt.key} checked={bpa[opt.key]} onChange={(e) => setOne(opt.key, e.detail.checked)}>
+            <Checkbox
+              key={opt.key}
+              checked={bpa[opt.key]}
+              onChange={(e) => setOne(opt.key, e.detail.checked)}
+            >
               {opt.label}
             </Checkbox>
           ))}
         </SpaceBetween>
 
         {anyUnblocked && (
-          <Alert type="warning" header="You acknowledge that the current settings might result in this bucket and the objects within becoming public.">
+          <Alert
+            type="warning"
+            header="You acknowledge that the current settings might result in this bucket and the objects within becoming public."
+          >
             <Checkbox
               checked={state.publicAccessAcknowledged}
-              onChange={(e) => setState((s) => ({ ...s, publicAccessAcknowledged: e.detail.checked }))}
+              onChange={(e) =>
+                setState((s) => ({
+                  ...s,
+                  publicAccessAcknowledged: e.detail.checked,
+                }))
+              }
             >
-              I acknowledge that the current settings might result in this bucket and the objects within becoming
-              public.
+              I acknowledge that the current settings might result in this
+              bucket and the objects within becoming public.
             </Checkbox>
           </Alert>
         )}

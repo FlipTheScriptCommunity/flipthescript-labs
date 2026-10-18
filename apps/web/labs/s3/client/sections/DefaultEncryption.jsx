@@ -9,12 +9,16 @@ import SpaceBetween from '@cloudscape-design/components/space-between';
 import { ENCRYPTION_TYPES, KMS_KEYS } from '../data';
 
 export default function DefaultEncryption({ state, setState }) {
-  const kmsKeyOption = KMS_KEYS.find((k) => k.value === state.kmsKey) || KMS_KEYS[0];
+  const kmsKeyOption =
+    KMS_KEYS.find((k) => k.value === state.kmsKey) || KMS_KEYS[0];
 
   return (
     <Container
       header={
-        <Header variant="h2" description="Server-side encryption is automatically applied to new objects stored in this bucket.">
+        <Header
+          variant="h2"
+          description="Server-side encryption is automatically applied to new objects stored in this bucket."
+        >
           Default encryption
         </Header>
       }
@@ -23,8 +27,13 @@ export default function DefaultEncryption({ state, setState }) {
         <FormField label="Encryption type">
           <RadioGroup
             value={state.encryptionType}
-            onChange={(e) => setState((s) => ({ ...s, encryptionType: e.detail.value }))}
-            items={ENCRYPTION_TYPES.map((t) => ({ value: t.value, label: t.label }))}
+            onChange={(e) =>
+              setState((s) => ({ ...s, encryptionType: e.detail.value }))
+            }
+            items={ENCRYPTION_TYPES.map((t) => ({
+              value: t.value,
+              label: t.label,
+            }))}
           />
         </FormField>
 
@@ -33,14 +42,27 @@ export default function DefaultEncryption({ state, setState }) {
             <FormField label="AWS KMS key">
               <Select
                 selectedOption={kmsKeyOption}
-                onChange={(e) => setState((s) => ({ ...s, kmsKey: e.detail.selectedOption.value }))}
+                onChange={(e) =>
+                  setState((s) => ({
+                    ...s,
+                    kmsKey: e.detail.selectedOption.value,
+                  }))
+                }
                 options={KMS_KEYS}
               />
             </FormField>
-            <FormField label="Bucket Key" description="Reduces encryption costs by lowering the number of requests made to AWS KMS.">
+            <FormField
+              label="Bucket Key"
+              description="Reduces encryption costs by lowering the number of requests made to AWS KMS."
+            >
               <Toggle
                 checked={state.bucketKeyEnabled}
-                onChange={(e) => setState((s) => ({ ...s, bucketKeyEnabled: e.detail.checked }))}
+                onChange={(e) =>
+                  setState((s) => ({
+                    ...s,
+                    bucketKeyEnabled: e.detail.checked,
+                  }))
+                }
               >
                 Enable Bucket Key
               </Toggle>

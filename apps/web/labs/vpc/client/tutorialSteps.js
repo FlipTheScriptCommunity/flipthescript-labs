@@ -93,7 +93,8 @@ export const TUTORIAL_CONTENT = {
       {
         targetId: 'section-dns-options',
         title: 'הגדרות DNS',
-        description: 'שתי ההגדרות האלה כמעט תמיד נשארות מופעלות — הן נדרשות עבור רוב השירותים התלויים ב-DNS בתוך ה-VPC.',
+        description:
+          'שתי ההגדרות האלה כמעט תמיד נשארות מופעלות — הן נדרשות עבור רוב השירותים התלויים ב-DNS בתוך ה-VPC.',
       },
       {
         targetId: 'section-summary',
@@ -127,7 +128,7 @@ export const TUTORIAL_CONTENT = {
         targetId: 'section-name-tag',
         title: 'Base name for all resources',
         description:
-          "What you enter here is used as a prefix for every resource that gets created — the VPC itself, " +
+          'What you enter here is used as a prefix for every resource that gets created — the VPC itself, ' +
           "subnets, route tables, and more — exactly like AWS's real console does automatically.",
       },
       {
@@ -140,12 +141,14 @@ export const TUTORIAL_CONTENT = {
       {
         targetId: 'section-ipv6-cidr',
         title: 'IPv6 CIDR — optional',
-        description: 'Most exercises don\'t need this; it\'s fine to leave it on "No IPv6 CIDR block".',
+        description:
+          'Most exercises don\'t need this; it\'s fine to leave it on "No IPv6 CIDR block".',
       },
       {
         targetId: 'section-tenancy',
         title: 'Tenancy',
-        description: '"Default" (the default) runs your instances on shared hardware — cheap, and almost always the right choice.',
+        description:
+          '"Default" (the default) runs your instances on shared hardware — cheap, and almost always the right choice.',
       },
       {
         targetId: 'section-az-subnets',
@@ -168,19 +171,20 @@ export const TUTORIAL_CONTENT = {
         targetId: 'section-vpc-endpoints',
         title: 'VPC endpoints',
         description:
-          "An S3 Gateway endpoint lets resources reach S3 directly from inside the VPC, without going over " +
+          'An S3 Gateway endpoint lets resources reach S3 directly from inside the VPC, without going over ' +
           'the public internet or through a NAT gateway — both faster and cheaper.',
       },
       {
         targetId: 'section-dns-options',
         title: 'DNS options',
-        description: "These two settings almost always stay enabled — most VPC-internal services depend on DNS working.",
+        description:
+          'These two settings almost always stay enabled — most VPC-internal services depend on DNS working.',
       },
       {
         targetId: 'section-summary',
         title: 'Preview & create',
         description:
-          "The preview panel shows a live map of everything about to be created — exactly like the real " +
+          'The preview panel shows a live map of everything about to be created — exactly like the real ' +
           'console. Double-check it, then click Create VPC.',
       },
     ],

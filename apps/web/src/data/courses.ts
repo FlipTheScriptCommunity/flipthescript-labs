@@ -55,7 +55,8 @@ export const courses: Course[] = [
       {
         id: 'vpc',
         title: 'VPC',
-        summary: 'מעבדה מעשית ליצירת רשת וירטואלית (VPC) עם תת-רשתות, שערי אינטרנט ו-NAT.',
+        summary:
+          'מעבדה מעשית ליצירת רשת וירטואלית (VPC) עם תת-רשתות, שערי אינטרנט ו-NAT.',
         embedPath: '/labs/vpc/index.html',
         about: [
           'VPC (‏Virtual Private Cloud) היא הרשת הפרטית והמבודדת שבתוכה רצים כמעט כל המשאבים שלכם ב-AWS — מכונות EC2, מסדי נתונים ועוד. בתוך VPC מחלקים את טווח הכתובות לתת-רשתות (Subnets) הפרוסות על פני אזורי זמינות שונים, וקובעים אילו מהן מחוברות לאינטרנט ("ציבוריות") ואילו מבודדות ממנו ("פרטיות").',
@@ -70,9 +71,6 @@ export function getCourseById(courseId: string): Course | undefined {
   return courses.find((course) => course.id === courseId);
 }
 
-export function getLabById(
-  courseId: string,
-  labId: string,
-): Lab | undefined {
+export function getLabById(courseId: string, labId: string): Lab | undefined {
   return getCourseById(courseId)?.labs.find((lab) => lab.id === labId);
 }

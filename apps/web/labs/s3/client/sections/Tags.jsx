@@ -27,7 +27,10 @@ export default function Tags({ state, setState }) {
   return (
     <Container
       header={
-        <Header variant="h2" description="You can use bucket tags to track storage costs and organize buckets by project or department.">
+        <Header
+          variant="h2"
+          description="You can use bucket tags to track storage costs and organize buckets by project or department."
+        >
           Tags — optional
         </Header>
       }
@@ -35,10 +38,28 @@ export default function Tags({ state, setState }) {
       <FormField label="Tags">
         <SpaceBetween size="xs">
           {tags.map((tag, i) => (
-            <SpaceBetween key={i} direction="horizontal" size="xs" alignItems="center">
-              <Input placeholder="Key" value={tag.key} onChange={(e) => updateTag(i, 'key', e.detail.value)} />
-              <Input placeholder="Value" value={tag.value} onChange={(e) => updateTag(i, 'value', e.detail.value)} />
-              <Button iconName="close" variant="icon" onClick={() => removeTag(i)} ariaLabel="Remove tag" />
+            <SpaceBetween
+              key={i}
+              direction="horizontal"
+              size="xs"
+              alignItems="center"
+            >
+              <Input
+                placeholder="Key"
+                value={tag.key}
+                onChange={(e) => updateTag(i, 'key', e.detail.value)}
+              />
+              <Input
+                placeholder="Value"
+                value={tag.value}
+                onChange={(e) => updateTag(i, 'value', e.detail.value)}
+              />
+              <Button
+                iconName="close"
+                variant="icon"
+                onClick={() => removeTag(i)}
+                ariaLabel="Remove tag"
+              />
             </SpaceBetween>
           ))}
           <Box>

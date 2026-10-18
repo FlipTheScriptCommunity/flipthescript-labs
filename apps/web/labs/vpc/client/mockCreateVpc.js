@@ -13,9 +13,11 @@ export function validateIpv4Cidr(cidr) {
   const match = cidr.match(IPV4_CIDR_RE);
   if (!match) return 'Enter a valid IPv4 CIDR block, e.g. 10.0.0.0/16.';
   const octets = [match[1], match[2], match[3], match[4]].map(Number);
-  if (octets.some((o) => o > 255)) return 'Each octet of the IPv4 CIDR block must be between 0 and 255.';
+  if (octets.some((o) => o > 255))
+    return 'Each octet of the IPv4 CIDR block must be between 0 and 255.';
   const prefix = Number(match[5]);
-  if (prefix < 16 || prefix > 28) return 'The VPC size must be between a /16 netmask and /28 netmask.';
+  if (prefix < 16 || prefix > 28)
+    return 'The VPC size must be between a /16 netmask and /28 netmask.';
   return null;
 }
 
@@ -44,7 +46,10 @@ function deriveSubnetCidr(vpcCidr, index) {
 }
 
 export function buildResourcePlan(form) {
-  const azs = Array.from({ length: form.azCount }, (_, i) => `${REGION}${AZ_LETTERS[i]}`);
+  const azs = Array.from(
+    { length: form.azCount },
+    (_, i) => `${REGION}${AZ_LETTERS[i]}`,
+  );
   let subnetIndex = 0;
 
   const publicSubnets = [];
@@ -67,7 +72,12 @@ export function buildResourcePlan(form) {
   }
 
   const hasPublic = publicSubnets.length > 0;
-  const natCount = form.natGateways === 'none' ? 0 : form.natGateways === 'one' ? 1 : publicSubnets.length;
+  const natCount =
+    form.natGateways === 'none'
+      ? 0
+      : form.natGateways === 'one'
+        ? 1
+        : publicSubnets.length;
 
   return { azs, publicSubnets, privateSubnets, hasPublic, natCount };
 }
@@ -94,10 +104,19 @@ export function mockCreateVpc(form) {
       resolve({
         vpcId: resourceId('vpc'),
         vpcCidr: form.ipv4Cidr,
-        ipv6CidrBlock: form.ipv6 === 'amazon' ? `2600:1f18:${randomHex(2)}:${randomHex(2)}00::/56` : null,
+        ipv6CidrBlock:
+          form.ipv6 === 'amazon'
+            ? `2600:1f18:${randomHex(2)}:${randomHex(2)}00::/56`
+            : null,
         region: REGION,
-        publicSubnets: plan.publicSubnets.map((s) => ({ ...s, subnetId: resourceId('subnet') })),
-        privateSubnets: plan.privateSubnets.map((s) => ({ ...s, subnetId: resourceId('subnet') })),
+        publicSubnets: plan.publicSubnets.map((s) => ({
+          ...s,
+          subnetId: resourceId('subnet'),
+        })),
+        privateSubnets: plan.privateSubnets.map((s) => ({
+          ...s,
+          subnetId: resourceId('subnet'),
+        })),
         internetGatewayId: plan.hasPublic ? resourceId('igw') : null,
         publicRouteTableId: plan.hasPublic ? resourceId('rtb') : null,
         privateRouteTableIds: plan.privateSubnets.map(() => resourceId('rtb')),
@@ -105,7 +124,8 @@ export function mockCreateVpc(form) {
           natGatewayId: resourceId('nat'),
           elasticIp: `${Math.floor(Math.random() * 223) + 3}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`,
         })),
-        s3EndpointId: form.vpcEndpoint === 's3-gateway' ? resourceId('vpce') : null,
+        s3EndpointId:
+          form.vpcEndpoint === 's3-gateway' ? resourceId('vpce') : null,
         dnsHostnames: form.dnsHostnames,
         dnsResolution: form.dnsResolution,
         createdAt: new Date().toISOString(),

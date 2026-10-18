@@ -9,13 +9,17 @@ import { REGIONS } from '../data';
 import { validateBucketName } from '../mockCreateBucket';
 
 export default function GeneralConfiguration({ state, setState }) {
-  const regionOption = REGIONS.find((r) => r.value === state.region) || REGIONS[0];
+  const regionOption =
+    REGIONS.find((r) => r.value === state.region) || REGIONS[0];
   const nameError = state.name ? validateBucketName(state.name) : null;
 
   return (
     <Container
       header={
-        <Header variant="h2" description="Buckets are containers for data stored in S3.">
+        <Header
+          variant="h2"
+          description="Buckets are containers for data stored in S3."
+        >
           General configuration
         </Header>
       }
@@ -37,7 +41,9 @@ export default function GeneralConfiguration({ state, setState }) {
         <FormField label="AWS Region">
           <Select
             selectedOption={regionOption}
-            onChange={(e) => setState((s) => ({ ...s, region: e.detail.selectedOption.value }))}
+            onChange={(e) =>
+              setState((s) => ({ ...s, region: e.detail.selectedOption.value }))
+            }
             options={REGIONS}
           />
         </FormField>

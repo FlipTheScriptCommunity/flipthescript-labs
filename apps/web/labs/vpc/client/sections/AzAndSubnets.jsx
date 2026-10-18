@@ -10,7 +10,8 @@ const countOption = (n) => ({ value: String(n), label: String(n) });
 
 export default function AzAndSubnets({ state, setState }) {
   const azOptions = [1, 2, 3].map(countOption);
-  const subnetOptionsFor = (azCount) => Array.from({ length: azCount + 1 }, (_, n) => countOption(n));
+  const subnetOptionsFor = (azCount) =>
+    Array.from({ length: azCount + 1 }, (_, n) => countOption(n));
 
   const setAzCount = (azCount) => {
     setState((s) => ({
@@ -40,22 +41,38 @@ export default function AzAndSubnets({ state, setState }) {
             options={azOptions}
           />
         </FormField>
-        <FormField label="Availability Zones used" description="Assigned automatically, in order.">
+        <FormField
+          label="Availability Zones used"
+          description="Assigned automatically, in order."
+        >
           <div style={{ fontFamily: 'monospace' }} dir="ltr">
-            {Array.from({ length: state.azCount }, (_, i) => `${REGION}${AZ_LETTERS[i]}`).join(', ')}
+            {Array.from(
+              { length: state.azCount },
+              (_, i) => `${REGION}${AZ_LETTERS[i]}`,
+            ).join(', ')}
           </div>
         </FormField>
         <FormField label="Number of public subnets">
           <Select
             selectedOption={countOption(state.publicSubnetCount)}
-            onChange={(e) => setState((s) => ({ ...s, publicSubnetCount: Number(e.detail.selectedOption.value) }))}
+            onChange={(e) =>
+              setState((s) => ({
+                ...s,
+                publicSubnetCount: Number(e.detail.selectedOption.value),
+              }))
+            }
             options={subnetOptionsFor(state.azCount)}
           />
         </FormField>
         <FormField label="Number of private subnets">
           <Select
             selectedOption={countOption(state.privateSubnetCount)}
-            onChange={(e) => setState((s) => ({ ...s, privateSubnetCount: Number(e.detail.selectedOption.value) }))}
+            onChange={(e) =>
+              setState((s) => ({
+                ...s,
+                privateSubnetCount: Number(e.detail.selectedOption.value),
+              }))
+            }
             options={subnetOptionsFor(state.azCount)}
           />
         </FormField>

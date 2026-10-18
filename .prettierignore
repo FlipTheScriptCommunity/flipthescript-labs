@@ -6,3 +6,8 @@
 .nx/self-healing
 **/.open-next
 **/.wrangler
+
+# Generated static lab bundles (built by Bun, not hand-formatted) — see
+# apps/web/labs/<id>/README.md
+apps/web/public/labs/*/bundle.js
+apps/web/public/labs/*/bundle.css

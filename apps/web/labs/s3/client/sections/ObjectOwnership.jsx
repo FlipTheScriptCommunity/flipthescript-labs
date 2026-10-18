@@ -18,24 +18,35 @@ export default function ObjectOwnership({ state, setState }) {
     >
       <RadioGroup
         value={state.objectOwnership}
-        onChange={(e) => setState((s) => ({ ...s, objectOwnership: e.detail.value }))}
+        onChange={(e) =>
+          setState((s) => ({ ...s, objectOwnership: e.detail.value }))
+        }
         items={[
           {
             value: 'bucket-owner-enforced',
             label: 'ACLs disabled (recommended)',
-            description: 'All objects in this bucket are owned by this account. Access to this bucket and its objects is specified using only policies.',
+            description:
+              'All objects in this bucket are owned by this account. Access to this bucket and its objects is specified using only policies.',
           },
           {
             value: 'acls-enabled',
             label: 'ACLs enabled',
-            description: 'Objects in this bucket can be owned by other AWS accounts, and access can be specified using ACLs.',
+            description:
+              'Objects in this bucket can be owned by other AWS accounts, and access can be specified using ACLs.',
           },
         ]}
       />
       {state.objectOwnership === 'bucket-owner-enforced' && (
-        <Box margin={{ top: 'm' }} color="text-body-secondary" fontSize="body-s">
-          <Box variant="awsui-key-label" display="inline">Bucket owner enforced</Box> — ACLs are disabled, and you (the
-          bucket owner) automatically own and have full control over every object in the bucket.
+        <Box
+          margin={{ top: 'm' }}
+          color="text-body-secondary"
+          fontSize="body-s"
+        >
+          <Box variant="awsui-key-label" display="inline">
+            Bucket owner enforced
+          </Box>{' '}
+          — ACLs are disabled, and you (the bucket owner) automatically own and
+          have full control over every object in the bucket.
         </Box>
       )}
     </Container>

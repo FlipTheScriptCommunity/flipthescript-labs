@@ -64,13 +64,18 @@ export default function App() {
     try {
       const parentWindow = window.parent;
       const parentDocument = parentWindow.document;
-      const headerHeight = parentDocument.querySelector('header')?.getBoundingClientRect().height ?? 0;
+      const headerHeight =
+        parentDocument.querySelector('header')?.getBoundingClientRect()
+          .height ?? 0;
       const rect = window.frameElement.getBoundingClientRect();
       const targetY = parentWindow.scrollY + rect.top - headerHeight - 8;
       parentWindow.scrollTo({ top: Math.max(targetY, 0), behavior: 'smooth' });
     } catch (e) {
       // Cross-origin or otherwise inaccessible — fall back to a plain scrollIntoView.
-      window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.frameElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     }
   };
 
@@ -112,7 +117,13 @@ export default function App() {
           identity={{ href: '#', title: 'AWS' }}
           utilities={[
             { type: 'button', text: 'N. Virginia', iconName: 'multiscreen' },
-            { type: 'button', text: 'Help', iconName: 'status-info', variant: 'primary-button', onClick: openTutorial },
+            {
+              type: 'button',
+              text: 'Help',
+              iconName: 'status-info',
+              variant: 'primary-button',
+              onClick: openTutorial,
+            },
             { type: 'button', iconName: 'notification' },
             { type: 'button', iconName: 'settings' },
             {
@@ -122,7 +133,10 @@ export default function App() {
               items: [{ id: 'signout', text: 'Sign out' }],
             },
           ]}
-          i18nStrings={{ overflowMenuTriggerText: 'More', overflowMenuTitleText: 'All' }}
+          i18nStrings={{
+            overflowMenuTriggerText: 'More',
+            overflowMenuTitleText: 'All',
+          }}
         />
       </div>
       <AppLayout
@@ -154,8 +168,16 @@ export default function App() {
           <BreadcrumbGroup
             items={
               result
-                ? [{ text: 'VPC', href: '#' }, { text: 'Your VPCs', href: '#/vpcs' }, { text: result.vpcId, href: '#' }]
-                : [{ text: 'VPC', href: '#' }, { text: 'Your VPCs', href: '#/vpcs' }, { text: 'Create VPC', href: '#' }]
+                ? [
+                    { text: 'VPC', href: '#' },
+                    { text: 'Your VPCs', href: '#/vpcs' },
+                    { text: result.vpcId, href: '#' },
+                  ]
+                : [
+                    { text: 'VPC', href: '#' },
+                    { text: 'Your VPCs', href: '#/vpcs' },
+                    { text: 'Create VPC', href: '#' },
+                  ]
             }
           />
         }
@@ -171,7 +193,9 @@ export default function App() {
                   description="Creates a VPC, plus subnets, route tables, and gateways, based on your configuration."
                   actions={
                     <SpaceBetween direction="horizontal" size="xs">
-                      <Button onClick={() => setState(initialState)}>Cancel</Button>
+                      <Button onClick={() => setState(initialState)}>
+                        Cancel
+                      </Button>
                     </SpaceBetween>
                   }
                 >
@@ -209,14 +233,21 @@ export default function App() {
                   </SpaceBetween>
                 </div>
                 <div id="section-summary" className="launch-summary">
-                  <SummaryPanel state={state} onCreate={handleCreate} creating={creating} error={error} />
+                  <SummaryPanel
+                    state={state}
+                    onCreate={handleCreate}
+                    creating={creating}
+                    error={error}
+                  />
                 </div>
               </div>
             </ContentLayout>
           )
         }
       />
-      {tutorialActive && !result && <TutorialOverlay key={tutorialKey} onExit={closeTutorial} />}
+      {tutorialActive && !result && (
+        <TutorialOverlay key={tutorialKey} onExit={closeTutorial} />
+      )}
     </>
   );
 }

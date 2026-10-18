@@ -11,7 +11,10 @@ export default function Ipv4Cidr({ state, setState }) {
   return (
     <Container
       header={
-        <Header variant="h2" description="The range of IPv4 addresses for your VPC, in CIDR notation. Must be between a /16 and /28 netmask.">
+        <Header
+          variant="h2"
+          description="The range of IPv4 addresses for your VPC, in CIDR notation. Must be between a /16 and /28 netmask."
+        >
           IPv4 CIDR block
         </Header>
       }
@@ -20,7 +23,9 @@ export default function Ipv4Cidr({ state, setState }) {
         <Input
           value={state.ipv4Cidr}
           placeholder="10.0.0.0/16"
-          onChange={(e) => setState((s) => ({ ...s, ipv4Cidr: e.detail.value }))}
+          onChange={(e) =>
+            setState((s) => ({ ...s, ipv4Cidr: e.detail.value }))
+          }
           nativeInputAttributes={{ dir: 'ltr' }}
         />
       </FormField>

@@ -12,24 +12,48 @@ import Box from '@cloudscape-design/components/box';
 import Alert from '@cloudscape-design/components/alert';
 import { STORAGE_CLASSES } from '../data';
 
-export default function UploadPanel({ bucket, upload, setUpload, onSubmit, uploading, error, onCancel }) {
-  const storageClassOption = STORAGE_CLASSES.find((c) => c.value === upload.storageClass) || STORAGE_CLASSES[0];
+export default function UploadPanel({
+  bucket,
+  upload,
+  setUpload,
+  onSubmit,
+  uploading,
+  error,
+  onCancel,
+}) {
+  const storageClassOption =
+    STORAGE_CLASSES.find((c) => c.value === upload.storageClass) ||
+    STORAGE_CLASSES[0];
 
   return (
     <ContentLayout
       header={
-        <Header variant="h1" description={`s3://${bucket.name}/${upload.prefix || ''}`}>
+        <Header
+          variant="h1"
+          description={`s3://${bucket.name}/${upload.prefix || ''}`}
+        >
           Upload to {bucket.name}
         </Header>
       }
     >
       <SpaceBetween size="l">
-        <Container header={<Header variant="h2" description="Drag and drop a file, or choose a file to add it to this bucket.">Select file</Header>}>
+        <Container
+          header={
+            <Header
+              variant="h2"
+              description="Drag and drop a file, or choose a file to add it to this bucket."
+            >
+              Select file
+            </Header>
+          }
+        >
           <div id="section-upload-file">
             <FormField>
               <FileUpload
                 value={upload.file ? [upload.file] : []}
-                onChange={(e) => setUpload((u) => ({ ...u, file: e.detail.value[0] || null }))}
+                onChange={(e) =>
+                  setUpload((u) => ({ ...u, file: e.detail.value[0] || null }))
+                }
                 i18nStrings={{
                   uploadButtonText: () => 'Choose file',
                   dropzoneText: () => 'Drop file to upload',
@@ -46,11 +70,16 @@ export default function UploadPanel({ bucket, upload, setUpload, onSubmit, uploa
 
         <Container header={<Header variant="h2">Destination</Header>}>
           <div id="section-upload-destination">
-            <FormField label="Key prefix" description="Optional folder-style path within the bucket.">
+            <FormField
+              label="Key prefix"
+              description="Optional folder-style path within the bucket."
+            >
               <Input
                 value={upload.prefix}
                 placeholder="uploads/"
-                onChange={(e) => setUpload((u) => ({ ...u, prefix: e.detail.value }))}
+                onChange={(e) =>
+                  setUpload((u) => ({ ...u, prefix: e.detail.value }))
+                }
                 nativeInputAttributes={{ dir: 'ltr' }}
               />
             </FormField>
@@ -59,10 +88,18 @@ export default function UploadPanel({ bucket, upload, setUpload, onSubmit, uploa
 
         <Container header={<Header variant="h2">Storage class</Header>}>
           <div id="section-upload-storage-class">
-            <FormField label="Storage class" description={storageClassOption.description}>
+            <FormField
+              label="Storage class"
+              description={storageClassOption.description}
+            >
               <Select
                 selectedOption={storageClassOption}
-                onChange={(e) => setUpload((u) => ({ ...u, storageClass: e.detail.selectedOption.value }))}
+                onChange={(e) =>
+                  setUpload((u) => ({
+                    ...u,
+                    storageClass: e.detail.selectedOption.value,
+                  }))
+                }
                 options={STORAGE_CLASSES}
               />
             </FormField>

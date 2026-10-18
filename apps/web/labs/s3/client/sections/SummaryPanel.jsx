@@ -27,7 +27,11 @@ export default function SummaryPanel({ state, onCreate, creating, error }) {
 
           <div>
             <Box variant="awsui-key-label">Block Public Access</Box>
-            <div>{allBlocked ? 'On — all public access blocked' : 'Off — some public access allowed'}</div>
+            <div>
+              {allBlocked
+                ? 'On — all public access blocked'
+                : 'Off — some public access allowed'}
+            </div>
           </div>
 
           <div>
@@ -42,12 +46,18 @@ export default function SummaryPanel({ state, onCreate, creating, error }) {
 
           {error && <Alert type="error">{error}</Alert>}
 
-          <Button variant="primary" fullWidth loading={creating} onClick={onCreate}>
+          <Button
+            variant="primary"
+            fullWidth
+            loading={creating}
+            onClick={onCreate}
+          >
             Create bucket
           </Button>
 
           <Box variant="small" color="text-body-secondary">
-            By creating a bucket, you agree to the AWS Customer Agreement and this mock environment's terms.
+            By creating a bucket, you agree to the AWS Customer Agreement and
+            this mock environment's terms.
           </Box>
         </SpaceBetween>
       </Container>

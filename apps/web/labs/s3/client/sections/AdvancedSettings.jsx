@@ -30,7 +30,9 @@ export default function AdvancedSettings({ state, setState }) {
           </Toggle>
         </FormField>
         {versioningOff && (
-          <Alert type="info">Enable Bucket Versioning above to turn on Object Lock.</Alert>
+          <Alert type="info">
+            Enable Bucket Versioning above to turn on Object Lock.
+          </Alert>
         )}
       </SpaceBetween>
     </ExpandableSection>

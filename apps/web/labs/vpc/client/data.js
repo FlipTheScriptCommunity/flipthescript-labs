@@ -19,11 +19,25 @@ export const IPV6_OPTIONS = [
 
 export const NAT_GATEWAY_OPTIONS = [
   { value: 'none', label: 'None' },
-  { value: 'one-per-az', label: '1 per AZ', description: 'Highly available, higher cost.' },
-  { value: 'one', label: '1', description: 'A single NAT gateway for the whole VPC — lower cost, single point of failure.' },
+  {
+    value: 'one-per-az',
+    label: '1 per AZ',
+    description: 'Highly available, higher cost.',
+  },
+  {
+    value: 'one',
+    label: '1',
+    description:
+      'A single NAT gateway for the whole VPC — lower cost, single point of failure.',
+  },
 ];
 
 export const VPC_ENDPOINT_OPTIONS = [
   { value: 'none', label: 'None' },
-  { value: 's3-gateway', label: 'S3 Gateway', description: 'Lets resources in private subnets reach S3 without a NAT gateway or internet access.' },
+  {
+    value: 's3-gateway',
+    label: 'S3 Gateway',
+    description:
+      'Lets resources in private subnets reach S3 without a NAT gateway or internet access.',
+  },
 ];

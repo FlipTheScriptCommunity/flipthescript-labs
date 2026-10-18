@@ -11,13 +11,43 @@ export const REGIONS = [
 ];
 
 export const STORAGE_CLASSES = [
-  { value: 'STANDARD', label: 'Standard', description: 'Frequently accessed data' },
-  { value: 'INTELLIGENT_TIERING', label: 'Intelligent-Tiering', description: 'Automatic cost savings for unknown or changing access patterns' },
-  { value: 'STANDARD_IA', label: 'Standard-IA', description: 'Infrequently accessed data' },
-  { value: 'ONEZONE_IA', label: 'One Zone-IA', description: 'Infrequently accessed, non-critical data' },
-  { value: 'GLACIER_IR', label: 'Glacier Instant Retrieval', description: 'Long-lived archive data accessed rarely' },
-  { value: 'GLACIER', label: 'Glacier Flexible Retrieval', description: 'Long-lived archive data accessed once or twice a year' },
-  { value: 'DEEP_ARCHIVE', label: 'Glacier Deep Archive', description: 'Long-lived archive data accessed rarely, retrieved within hours' },
+  {
+    value: 'STANDARD',
+    label: 'Standard',
+    description: 'Frequently accessed data',
+  },
+  {
+    value: 'INTELLIGENT_TIERING',
+    label: 'Intelligent-Tiering',
+    description:
+      'Automatic cost savings for unknown or changing access patterns',
+  },
+  {
+    value: 'STANDARD_IA',
+    label: 'Standard-IA',
+    description: 'Infrequently accessed data',
+  },
+  {
+    value: 'ONEZONE_IA',
+    label: 'One Zone-IA',
+    description: 'Infrequently accessed, non-critical data',
+  },
+  {
+    value: 'GLACIER_IR',
+    label: 'Glacier Instant Retrieval',
+    description: 'Long-lived archive data accessed rarely',
+  },
+  {
+    value: 'GLACIER',
+    label: 'Glacier Flexible Retrieval',
+    description: 'Long-lived archive data accessed once or twice a year',
+  },
+  {
+    value: 'DEEP_ARCHIVE',
+    label: 'Glacier Deep Archive',
+    description:
+      'Long-lived archive data accessed rarely, retrieved within hours',
+  },
 ];
 
 export const ENCRYPTION_TYPES = [
@@ -34,18 +64,22 @@ export const KMS_KEYS = [
 export const BLOCK_PUBLIC_ACCESS_OPTIONS = [
   {
     key: 'blockNewAcls',
-    label: 'Block public access to buckets and objects granted through new access control lists (ACLs)',
+    label:
+      'Block public access to buckets and objects granted through new access control lists (ACLs)',
   },
   {
     key: 'blockAnyAcls',
-    label: 'Block public access to buckets and objects granted through any access control lists (ACLs)',
+    label:
+      'Block public access to buckets and objects granted through any access control lists (ACLs)',
   },
   {
     key: 'blockNewPolicies',
-    label: 'Block public access to buckets and objects granted through new public bucket or access point policies',
+    label:
+      'Block public access to buckets and objects granted through new public bucket or access point policies',
   },
   {
     key: 'blockAnyPolicies',
-    label: 'Block public and cross-account access to buckets and objects through any public bucket or access point policies',
+    label:
+      'Block public and cross-account access to buckets and objects through any public bucket or access point policies',
   },
 ];

@@ -16,11 +16,21 @@ function randomHex(bytes) {
 function formatBytes(bytes) {
   if (bytes === 0) return '0 Bytes';
   const units = ['Bytes', 'KB', 'MB', 'GB'];
-  const i = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+  const i = Math.min(
+    Math.floor(Math.log(bytes) / Math.log(1024)),
+    units.length - 1,
+  );
   return `${(bytes / 1024 ** i).toFixed(i === 0 ? 0 : 1)} ${units[i]}`;
 }
 
-export function mockUploadObject({ bucketName, region, file, prefix, storageClass, encryptionType }) {
+export function mockUploadObject({
+  bucketName,
+  region,
+  file,
+  prefix,
+  storageClass,
+  encryptionType,
+}) {
   return new Promise((resolve, reject) => {
     if (!file) {
       reject(new Error('Choose a file to upload.'));

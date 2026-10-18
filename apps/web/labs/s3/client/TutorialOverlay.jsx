@@ -20,7 +20,7 @@ function renderBidi(text) {
       </bdi>
     ) : (
       part
-    )
+    ),
   );
 }
 
@@ -32,11 +32,24 @@ function LanguageToggle({ language, onChange }) {
   // switching language. Keeping עברית on the right / EN on the left always
   // gives it a stable, predictable position.
   return (
-    <div className="fts-lang-toggle" dir="rtl" role="group" aria-label="Language / שפה">
-      <button type="button" className={language === 'he' ? 'active' : ''} onClick={() => onChange('he')}>
+    <div
+      className="fts-lang-toggle"
+      dir="rtl"
+      role="group"
+      aria-label="Language / שפה"
+    >
+      <button
+        type="button"
+        className={language === 'he' ? 'active' : ''}
+        onClick={() => onChange('he')}
+      >
         עברית
       </button>
-      <button type="button" className={language === 'en' ? 'active' : ''} onClick={() => onChange('en')}>
+      <button
+        type="button"
+        className={language === 'en' ? 'active' : ''}
+        onClick={() => onChange('en')}
+      >
         EN
       </button>
     </div>
@@ -121,23 +134,35 @@ export default function TutorialOverlay({ onExit, section = 'create' }) {
     // from a global rule in styles.css targeting Cloudscape's dialog role
     // directly, for the same reason.
     return createPortal(
-      <Modal visible onDismiss={onExit} header={renderBidi(content.welcome.title)}>
+      <Modal
+        visible
+        onDismiss={onExit}
+        header={renderBidi(content.welcome.title)}
+      >
         <div dir={content.dir}>
           <div className="fts-lang-row">
             <LanguageToggle language={language} onChange={setLanguage} />
           </div>
           <p style={{ marginTop: 12 }}>{renderBidi(content.welcome.body)}</p>
           <div className="fts-modal-actions">
-            <button type="button" className="fts-btn-secondary" onClick={onExit}>
+            <button
+              type="button"
+              className="fts-btn-secondary"
+              onClick={onExit}
+            >
               {content.welcome.skip}
             </button>
-            <button type="button" className="fts-btn-primary" onClick={() => setShowWelcome(false)}>
+            <button
+              type="button"
+              className="fts-btn-primary"
+              onClick={() => setShowWelcome(false)}
+            >
               {content.welcome.start}
             </button>
           </div>
         </div>
       </Modal>,
-      document.body
+      document.body,
     );
   }
 
@@ -154,9 +179,16 @@ export default function TutorialOverlay({ onExit, section = 'create' }) {
           }}
         />
       )}
-      <div className="tutorial-panel fts-font" role="dialog" aria-label="Guided walkthrough" dir={content.dir}>
+      <div
+        className="tutorial-panel fts-font"
+        role="dialog"
+        aria-label="Guided walkthrough"
+        dir={content.dir}
+      >
         <div className="fts-panel-header">
-          <span className="tutorial-step-label">{content.ui.stepLabel(stepIndex + 1, steps.length)}</span>
+          <span className="tutorial-step-label">
+            {content.ui.stepLabel(stepIndex + 1, steps.length)}
+          </span>
           <LanguageToggle language={language} onChange={setLanguage} />
         </div>
         <h3 className="tutorial-title">{renderBidi(step.title)}</h3>
@@ -168,16 +200,28 @@ export default function TutorialOverlay({ onExit, section = 'create' }) {
           </button>
           <div className="fts-panel-actions-end">
             {stepIndex > 0 && (
-              <button type="button" className="fts-btn-secondary" onClick={goBack}>
+              <button
+                type="button"
+                className="fts-btn-secondary"
+                onClick={goBack}
+              >
                 {content.ui.back}
               </button>
             )}
             {!isLast ? (
-              <button type="button" className="fts-btn-primary" onClick={goNext}>
+              <button
+                type="button"
+                className="fts-btn-primary"
+                onClick={goNext}
+              >
                 {content.ui.next}
               </button>
             ) : (
-              <button type="button" className="fts-btn-primary" onClick={onExit}>
+              <button
+                type="button"
+                className="fts-btn-primary"
+                onClick={onExit}
+              >
                 {content.ui.finish}
               </button>
             )}
@@ -185,6 +229,6 @@ export default function TutorialOverlay({ onExit, section = 'create' }) {
         </div>
       </div>
     </>,
-    document.body
+    document.body,
   );
 }

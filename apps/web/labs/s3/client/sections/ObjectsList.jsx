@@ -10,7 +10,13 @@ import Button from '@cloudscape-design/components/button';
 import Link from '@cloudscape-design/components/link';
 import ColumnLayout from '@cloudscape-design/components/column-layout';
 
-export default function ObjectsList({ bucket, objects, onUpload, showCreatedBanner, onDismissBanner }) {
+export default function ObjectsList({
+  bucket,
+  objects,
+  onUpload,
+  showCreatedBanner,
+  onDismissBanner,
+}) {
   return (
     <ContentLayout
       header={
@@ -18,7 +24,11 @@ export default function ObjectsList({ bucket, objects, onUpload, showCreatedBann
           variant="h1"
           description={`S3 URI: s3://${bucket.name}`}
           actions={
-            <Button variant="primary" onClick={onUpload} id="action-open-upload">
+            <Button
+              variant="primary"
+              onClick={onUpload}
+              id="action-open-upload"
+            >
               Upload
             </Button>
           }
@@ -29,7 +39,12 @@ export default function ObjectsList({ bucket, objects, onUpload, showCreatedBann
     >
       <SpaceBetween size="l">
         {showCreatedBanner && (
-          <Alert type="success" header="Successfully created bucket" dismissible onDismiss={onDismissBanner}>
+          <Alert
+            type="success"
+            header="Successfully created bucket"
+            dismissible
+            onDismiss={onDismissBanner}
+          >
             <Link href="#" onFollow={(e) => e.preventDefault()}>
               {bucket.name}
             </Link>{' '}
@@ -45,7 +60,9 @@ export default function ObjectsList({ bucket, objects, onUpload, showCreatedBann
             </div>
             <div>
               <Box variant="awsui-key-label">Bucket versioning</Box>
-              <div>{bucket.versioning === 'enable' ? 'Enabled' : 'Disabled'}</div>
+              <div>
+                {bucket.versioning === 'enable' ? 'Enabled' : 'Disabled'}
+              </div>
             </div>
             <div>
               <Box variant="awsui-key-label">Default encryption</Box>
@@ -55,7 +72,11 @@ export default function ObjectsList({ bucket, objects, onUpload, showCreatedBann
         </Container>
 
         <Table
-          header={<Header variant="h2" counter={`(${objects.length})`}>Objects</Header>}
+          header={
+            <Header variant="h2" counter={`(${objects.length})`}>
+              Objects
+            </Header>
+          }
           columnDefinitions={[
             {
               id: 'key',
@@ -66,7 +87,11 @@ export default function ObjectsList({ bucket, objects, onUpload, showCreatedBann
                 </Link>
               ),
             },
-            { id: 'storageClass', header: 'Storage class', cell: (item) => item.storageClass },
+            {
+              id: 'storageClass',
+              header: 'Storage class',
+              cell: (item) => item.storageClass,
+            },
             { id: 'size', header: 'Size', cell: (item) => item.sizeLabel },
             {
               id: 'uploadedAt',

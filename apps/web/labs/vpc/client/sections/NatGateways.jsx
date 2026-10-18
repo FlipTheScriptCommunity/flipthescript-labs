@@ -11,18 +11,28 @@ export default function NatGateways({ state, setState }) {
   return (
     <Container
       header={
-        <Header variant="h2" description="Lets resources in private subnets reach the internet (e.g. for software updates) without being directly reachable from it. Billed per hour, plus data processed.">
+        <Header
+          variant="h2"
+          description="Lets resources in private subnets reach the internet (e.g. for software updates) without being directly reachable from it. Billed per hour, plus data processed."
+        >
           NAT gateways ($)
         </Header>
       }
     >
       <RadioGroup
         value={state.natGateways}
-        onChange={(e) => setState((s) => ({ ...s, natGateways: e.detail.value }))}
-        items={NAT_GATEWAY_OPTIONS.map((o) => ({ ...o, disabled: o.value !== 'none' && noPublicSubnets }))}
+        onChange={(e) =>
+          setState((s) => ({ ...s, natGateways: e.detail.value }))
+        }
+        items={NAT_GATEWAY_OPTIONS.map((o) => ({
+          ...o,
+          disabled: o.value !== 'none' && noPublicSubnets,
+        }))}
       />
       {noPublicSubnets && state.natGateways !== 'none' && (
-        <Alert type="warning">A NAT gateway needs at least one public subnet to live in.</Alert>
+        <Alert type="warning">
+          A NAT gateway needs at least one public subnet to live in.
+        </Alert>
       )}
     </Container>
   );

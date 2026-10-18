@@ -126,7 +126,7 @@ export const TUTORIAL_CONTENT = {
           description:
             "A bucket's name must be globally unique across all of AWS — not just your account — so it's common " +
             'to append numbers or a random id. Names must be lowercase, with no spaces. Also pick the AWS Region ' +
-            "where the data actually lives — usually whichever is closest to your users.",
+            'where the data actually lives — usually whichever is closest to your users.',
         },
         {
           targetId: 'section-object-ownership',
@@ -165,7 +165,7 @@ export const TUTORIAL_CONTENT = {
           targetId: 'section-advanced-settings',
           title: 'Object Lock (optional)',
           description:
-            "Prevents objects from being deleted or changed for a fixed period, or indefinitely — useful for " +
+            'Prevents objects from being deleted or changed for a fixed period, or indefinitely — useful for ' +
             'regulatory requirements. It can only be turned on at bucket creation, and requires Bucket Versioning ' +
             'to be enabled. Most learners can leave this off.',
         },
@@ -242,7 +242,8 @@ export const TUTORIAL_CONTENT = {
         {
           targetId: 'section-upload-file',
           title: 'Choose a file',
-          description: 'Drag a file onto the dropzone, or click "Choose file" to pick one from your computer.',
+          description:
+            'Drag a file onto the dropzone, or click "Choose file" to pick one from your computer.',
         },
         {
           targetId: 'section-upload-destination',
@@ -261,7 +262,8 @@ export const TUTORIAL_CONTENT = {
         {
           targetId: 'section-upload-submit',
           title: 'Upload',
-          description: "Click Upload to finish. You'll then see the created object's details, including its key and S3 URI.",
+          description:
+            "Click Upload to finish. You'll then see the created object's details, including its key and S3 URI.",
         },
       ],
     },

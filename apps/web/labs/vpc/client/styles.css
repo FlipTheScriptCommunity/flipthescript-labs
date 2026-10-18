@@ -161,7 +161,11 @@ body {
   box-shadow: 0 0 0 9999px rgba(15, 23, 42, 0.6);
   pointer-events: none;
   z-index: 2000;
-  transition: top 0.25s ease, left 0.25s ease, width 0.25s ease, height 0.25s ease;
+  transition:
+    top 0.25s ease,
+    left 0.25s ease,
+    width 0.25s ease,
+    height 0.25s ease;
 }
 
 .tutorial-panel {
@@ -222,7 +226,14 @@ body {
 
 .fts-font,
 .fts-font * {
-  font-family: 'Rubik', 'Assistant', 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    'Rubik',
+    'Assistant',
+    'Heebo',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
 }
 
 .fts-font[dir='rtl'] {
@@ -232,7 +243,14 @@ body {
 
 [role='dialog'],
 [role='dialog'] * {
-  font-family: 'Rubik', 'Assistant', 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:
+    'Rubik',
+    'Assistant',
+    'Heebo',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
 }
 
 html[dir='rtl'] [role='dialog'] {
@@ -291,7 +309,9 @@ html[dir='rtl'] [role='dialog'] {
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .fts-lang-toggle button:hover:not(.active) {

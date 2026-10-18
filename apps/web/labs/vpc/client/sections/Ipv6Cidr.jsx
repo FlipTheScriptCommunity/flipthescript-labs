@@ -6,7 +6,16 @@ import { IPV6_OPTIONS } from '../data';
 
 export default function Ipv6Cidr({ state, setState }) {
   return (
-    <Container header={<Header variant="h2" description="Optional. Most teaching workloads don't need IPv6.">IPv6 CIDR block</Header>}>
+    <Container
+      header={
+        <Header
+          variant="h2"
+          description="Optional. Most teaching workloads don't need IPv6."
+        >
+          IPv6 CIDR block
+        </Header>
+      }
+    >
       <RadioGroup
         value={state.ipv6}
         onChange={(e) => setState((s) => ({ ...s, ipv6: e.detail.value }))}

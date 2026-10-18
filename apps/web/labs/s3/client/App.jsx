@@ -86,13 +86,18 @@ export default function App() {
     try {
       const parentWindow = window.parent;
       const parentDocument = parentWindow.document;
-      const headerHeight = parentDocument.querySelector('header')?.getBoundingClientRect().height ?? 0;
+      const headerHeight =
+        parentDocument.querySelector('header')?.getBoundingClientRect()
+          .height ?? 0;
       const rect = window.frameElement.getBoundingClientRect();
       const targetY = parentWindow.scrollY + rect.top - headerHeight - 8;
       parentWindow.scrollTo({ top: Math.max(targetY, 0), behavior: 'smooth' });
     } catch (e) {
       // Cross-origin or otherwise inaccessible — fall back to a plain scrollIntoView.
-      window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.frameElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     }
   };
 
@@ -181,7 +186,8 @@ export default function App() {
       { text: 'S3', href: '#' },
       { text: 'Buckets', href: '#/buckets' },
     ];
-    if (view === 'create') return [...base, { text: 'Create bucket', href: '#' }];
+    if (view === 'create')
+      return [...base, { text: 'Create bucket', href: '#' }];
     if (bucket) {
       const withBucket = [...base, { text: bucket.name, href: '#/bucket' }];
       if (view === 'upload' || view === 'upload-success') {
@@ -202,7 +208,9 @@ export default function App() {
             description="Buckets are containers for data stored in S3."
             actions={
               <SpaceBetween direction="horizontal" size="xs">
-                <Button onClick={() => setFormState(initialFormState)}>Cancel</Button>
+                <Button onClick={() => setFormState(initialFormState)}>
+                  Cancel
+                </Button>
               </SpaceBetween>
             }
           >
@@ -214,7 +222,10 @@ export default function App() {
           <div className="launch-main">
             <SpaceBetween size="l">
               <div id="section-general-configuration">
-                <GeneralConfiguration state={formState} setState={setFormState} />
+                <GeneralConfiguration
+                  state={formState}
+                  setState={setFormState}
+                />
               </div>
               <div id="section-object-ownership">
                 <ObjectOwnership state={formState} setState={setFormState} />
@@ -237,7 +248,12 @@ export default function App() {
             </SpaceBetween>
           </div>
           <div id="section-summary" className="launch-summary">
-            <SummaryPanel state={formState} onCreate={handleCreateBucket} creating={creating} error={createError} />
+            <SummaryPanel
+              state={formState}
+              onCreate={handleCreateBucket}
+              creating={creating}
+              error={createError}
+            />
           </div>
         </div>
       </ContentLayout>
@@ -265,7 +281,9 @@ export default function App() {
       />
     );
   } else if (view === 'upload-success' && uploadResult) {
-    content = <UploadSuccess result={uploadResult} onClose={handleCloseUploadSuccess} />;
+    content = (
+      <UploadSuccess result={uploadResult} onClose={handleCloseUploadSuccess} />
+    );
   }
 
   return (
@@ -275,7 +293,13 @@ export default function App() {
           identity={{ href: '#', title: 'AWS' }}
           utilities={[
             { type: 'button', text: 'N. Virginia', iconName: 'multiscreen' },
-            { type: 'button', text: 'Help', iconName: 'status-info', variant: 'primary-button', onClick: openTutorial },
+            {
+              type: 'button',
+              text: 'Help',
+              iconName: 'status-info',
+              variant: 'primary-button',
+              onClick: openTutorial,
+            },
             { type: 'button', iconName: 'notification' },
             { type: 'button', iconName: 'settings' },
             {
@@ -285,7 +309,10 @@ export default function App() {
               items: [{ id: 'signout', text: 'Sign out' }],
             },
           ]}
-          i18nStrings={{ overflowMenuTriggerText: 'More', overflowMenuTitleText: 'All' }}
+          i18nStrings={{
+            overflowMenuTriggerText: 'More',
+            overflowMenuTitleText: 'All',
+          }}
         />
       </div>
       <AppLayout
@@ -302,7 +329,11 @@ export default function App() {
                 type: 'section',
                 text: 'Access Management',
                 items: [
-                  { type: 'link', text: 'Block Public Access settings for this account', href: '#' },
+                  {
+                    type: 'link',
+                    text: 'Block Public Access settings for this account',
+                    href: '#',
+                  },
                   { type: 'link', text: 'Access Analyzer for S3', href: '#' },
                 ],
               },
@@ -319,7 +350,11 @@ export default function App() {
         content={content}
       />
       {tutorialActive && (view === 'create' || view === 'upload') && (
-        <TutorialOverlay key={tutorialKey} section={tutorialSection} onExit={closeTutorial} />
+        <TutorialOverlay
+          key={tutorialKey}
+          section={tutorialSection}
+          onExit={closeTutorial}
+        />
       )}
     </>
   );

@@ -25,7 +25,11 @@ export function validateBucketName(name) {
   if (name.startsWith('xn--') || name.startsWith('sthree-')) {
     return 'Bucket name must not start with the prefix "xn--" or "sthree-".';
   }
-  if (name.endsWith('-s3alias') || name.endsWith('--ol-s3') || name.endsWith('--x-s3')) {
+  if (
+    name.endsWith('-s3alias') ||
+    name.endsWith('--ol-s3') ||
+    name.endsWith('--x-s3')
+  ) {
     return 'Bucket name must not end with the suffix "-s3alias", "--ol-s3", or "--x-s3".';
   }
   return null;
@@ -49,15 +53,23 @@ export function mockCreateBucket(payload) {
       return;
     }
     if (payload.objectLockEnabled && payload.versioning !== 'enable') {
-      reject(new Error('Object Lock requires Bucket Versioning to be enabled.'));
+      reject(
+        new Error('Object Lock requires Bucket Versioning to be enabled.'),
+      );
       return;
     }
-    if (!payload.blockPublicAccess.blockNewAcls &&
-        !payload.blockPublicAccess.blockAnyAcls &&
-        !payload.blockPublicAccess.blockNewPolicies &&
-        !payload.blockPublicAccess.blockAnyPolicies &&
-        !payload.publicAccessAcknowledged) {
-      reject(new Error('You must acknowledge that the bucket and the objects in it can be public before turning off Block Public Access settings.'));
+    if (
+      !payload.blockPublicAccess.blockNewAcls &&
+      !payload.blockPublicAccess.blockAnyAcls &&
+      !payload.blockPublicAccess.blockNewPolicies &&
+      !payload.blockPublicAccess.blockAnyPolicies &&
+      !payload.publicAccessAcknowledged
+    ) {
+      reject(
+        new Error(
+          'You must acknowledge that the bucket and the objects in it can be public before turning off Block Public Access settings.',
+        ),
+      );
       return;
     }
 

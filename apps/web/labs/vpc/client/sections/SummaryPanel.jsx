@@ -35,16 +35,24 @@ export default function SummaryPanel({ state, onCreate, creating, error }) {
           <div>
             <Box variant="awsui-key-label">Resources to be created</Box>
             <div>
-              1 VPC, {plan.publicSubnets.length + plan.privateSubnets.length} subnets
+              1 VPC, {plan.publicSubnets.length + plan.privateSubnets.length}{' '}
+              subnets
               {plan.hasPublic ? ', 1 internet gateway' : ''}
-              {plan.natCount > 0 ? `, ${plan.natCount} NAT gateway${plan.natCount > 1 ? 's' : ''}` : ''}
+              {plan.natCount > 0
+                ? `, ${plan.natCount} NAT gateway${plan.natCount > 1 ? 's' : ''}`
+                : ''}
               {state.vpcEndpoint === 's3-gateway' ? ', 1 VPC endpoint' : ''}
             </div>
           </div>
 
           {error && <Alert type="error">{error}</Alert>}
 
-          <Button variant="primary" fullWidth loading={creating} onClick={onCreate}>
+          <Button
+            variant="primary"
+            fullWidth
+            loading={creating}
+            onClick={onCreate}
+          >
             Create VPC
           </Button>
         </SpaceBetween>
