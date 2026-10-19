@@ -1,0 +1,361 @@
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #f2f3f3;
+}
+
+#top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+}
+
+.launch-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 24px;
+  align-items: start;
+}
+
+.launch-main {
+  min-width: 0;
+}
+
+.summary-panel {
+  position: sticky;
+  top: 76px;
+}
+
+@media (max-width: 991px) {
+  .launch-grid {
+    grid-template-columns: 1fr;
+  }
+  .summary-panel {
+    position: static;
+  }
+}
+
+/* Guided /help walkthrough */
+
+.tutorial-spotlight {
+  position: fixed;
+  border-radius: 12px;
+  border: 2px solid #0972d3;
+  box-shadow: 0 0 0 9999px rgba(15, 23, 42, 0.6);
+  pointer-events: none;
+  z-index: 2000;
+  transition:
+    top 0.25s ease,
+    left 0.25s ease,
+    width 0.25s ease,
+    height 0.25s ease;
+}
+
+.tutorial-panel {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  width: 380px;
+  max-width: calc(100vw - 48px);
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  padding: 20px;
+  z-index: 2100;
+}
+
+.tutorial-step-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #687078;
+  letter-spacing: 0.02em;
+}
+
+.tutorial-panel[dir='rtl'] .tutorial-step-label {
+  letter-spacing: normal;
+}
+
+.tutorial-title {
+  margin: 6px 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #16191f;
+}
+
+.tutorial-description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #16191f;
+}
+
+.tutorial-tip {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: #f2f8fd;
+  border: 1px solid #99c7f2;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #16191f;
+}
+
+/*
+ * FlipTheScript-branded controls (gold/blue/purple, matching the course
+ * platform's own design language) layered on top of the AWS mock, so the
+ * teaching UI — Help trigger, walkthrough panel, language toggle — reads as
+ * "part of the lab" rather than another piece of the simulated AWS console.
+ */
+
+.fts-font,
+.fts-font * {
+  font-family:
+    'Rubik',
+    'Assistant',
+    'Heebo',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+.fts-font[dir='rtl'] {
+  line-height: 1.7;
+  word-spacing: 0.05em;
+}
+
+[role='dialog'],
+[role='dialog'] * {
+  font-family:
+    'Rubik',
+    'Assistant',
+    'Heebo',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+html[dir='rtl'] [role='dialog'] {
+  line-height: 1.7;
+  word-spacing: 0.05em;
+}
+
+.fts-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fts-panel-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.fts-panel-actions-end {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fts-lang-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.fts-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.fts-lang-toggle {
+  display: inline-flex;
+  border: 1.5px solid #8e44ad;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.fts-lang-toggle button {
+  border: none;
+  background: transparent;
+  color: #8e44ad;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.fts-lang-toggle button:hover:not(.active) {
+  background: rgba(142, 68, 173, 0.08);
+}
+
+.fts-lang-toggle button.active {
+  background: #8e44ad;
+  color: #ffffff;
+}
+
+.fts-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 20px;
+  background: #f3b61f;
+  color: #0a0b10;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.fts-btn-primary:hover {
+  filter: brightness(1.06);
+}
+
+.fts-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid #2a8bf2;
+  border-radius: 8px;
+  padding: 7.5px 18px;
+  background: transparent;
+  color: #2a8bf2;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.fts-btn-secondary:hover {
+  background: rgba(42, 139, 242, 0.08);
+}
+
+/* Lambda lab */
+
+.lambda-form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Code source editor — a plain textarea with a line-number gutter, styled
+   like the dark code editor in the real Lambda console. */
+.lambda-editor {
+  display: flex;
+  border: 1px solid #414d5c;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0f1b2a;
+  font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 20px;
+}
+
+.lambda-editor-tab {
+  padding: 6px 14px;
+  background: #192534;
+  color: #e9ebed;
+  border-bottom: 1px solid #414d5c;
+  font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.lambda-editor-gutter {
+  padding: 10px 8px;
+  min-width: 36px;
+  text-align: right;
+  color: #8d99a8;
+  background: #0f1b2a;
+  border-right: 1px solid #263445;
+  user-select: none;
+  white-space: pre;
+  overflow: hidden;
+}
+
+.lambda-editor textarea {
+  flex: 1;
+  min-height: 260px;
+  margin: 0;
+  padding: 10px 12px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  color: #e9ebed;
+  caret-color: #ffffff;
+  font: inherit;
+  line-height: inherit;
+  white-space: pre;
+  overflow: auto;
+  tab-size: 2;
+}
+
+.lambda-editor-small textarea {
+  min-height: 140px;
+}
+
+.lambda-logs {
+  margin: 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #0f1b2a;
+  color: #e9ebed;
+  font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+  font-size: 12px;
+  line-height: 18px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 320px;
+  overflow: auto;
+}
+
+/* Function overview diagram */
+.lambda-diagram {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.lambda-diagram-function {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 1px solid #d5dbdb;
+  border-radius: 8px;
+  background: #ffffff;
+  min-width: 220px;
+}
+
+.lambda-diagram-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: #ed7100;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 18px;
+  flex-shrink: 0;
+}
