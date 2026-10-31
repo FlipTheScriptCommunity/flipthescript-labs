@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 
 const navLinks = [
   { label: 'קורסים', href: '/courses' },
+  { label: 'משתתפים', href: '/contributors' },
   // '/#mission', not a bare '#mission': the mission section only exists on
   // the homepage, so a same-page-only hash href silently did nothing on
   // any other route (e.g. /courses) — there's no id="mission" there for

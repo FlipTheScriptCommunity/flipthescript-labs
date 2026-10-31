@@ -1,0 +1,19 @@
+# Contributors shown on /contributors, in this order.
+#
+# Fields (only `name` is required):
+#   name:     Display name (required)
+#   role:     Short role/description, shown under the name
+#   image:    https:// URL, or a file under apps/web/public/contributors/
+#             referenced as /contributors/<file>
+#             (when omitted, the GitHub avatar is used, then initials)
+#   github:   GitHub username or profile URL
+#   linkedin: Full LinkedIn profile URL
+#   website:  Full personal website URL
+#   x:        Full X profile URL
+#
+# Invalid entries fail `bunx nx build web` with the entry index and field name.
+
+- name: FlipTheScript Community
+  role: קהילת הקוד הפתוח מאחורי הפרויקט
+  github: FlipTheScriptCommunity
+  website: https://github.com/FlipTheScriptCommunity
