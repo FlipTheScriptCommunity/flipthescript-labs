@@ -2,3 +2,7 @@
 # enough to slow down Nx hashing and pollute lint/format if it is ever scanned.
 **/.open-next
 **/.wrangler
+# Standalone Codespace lab template (its own package.json/bun.lock, split out
+# into its own repo) — not an Nx project, and its deps aren't installed by the
+# root `bun install`.
+templates/
