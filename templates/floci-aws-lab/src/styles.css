@@ -1,0 +1,456 @@
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #f2f3f3;
+}
+
+#top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+}
+
+.object-preview {
+  margin: 0;
+  padding: 12px;
+  max-height: 60vh;
+  overflow: auto;
+  background: #f4f4f4;
+  border: 1px solid #e9ebed;
+  border-radius: 8px;
+  font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.code-editor {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #8c8c94;
+  border-radius: 8px;
+  background: #0f1b2a;
+  color: #e9ebed;
+  font-family: Monaco, Menlo, Consolas, 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  tab-size: 2;
+  resize: vertical;
+}
+
+.code-editor:focus {
+  outline: 2px solid #0972d3;
+  outline-offset: 1px;
+}
+
+.break-all {
+  word-break: break-all;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------------
+ * FlipTheScript teaching layer (challenge panel + tutorial), styled with the
+ * course platform's own brand colours (gold / blue / purple) so it reads as
+ * the platform, not as another part of the simulated AWS console. Ported from
+ * the EC2 lab (apps/web/labs/ec2/client/styles.css in the platform repo).
+ * ------------------------------------------------------------------------- */
+
+.fts-font,
+.fts-font * {
+  font-family:
+    'Rubik',
+    'Assistant',
+    'Heebo',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+.fts-font[dir='rtl'] {
+  line-height: 1.7;
+  word-spacing: 0.05em;
+}
+
+/* Cloudscape portals <Modal> outside the React tree, so the class above never
+   reaches it — target its dialog role directly (see TutorialOverlay.tsx). */
+[role='dialog'],
+[role='dialog'] * {
+  font-family:
+    'Rubik',
+    'Assistant',
+    'Heebo',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+html[dir='rtl'] [role='dialog'] {
+  line-height: 1.7;
+  word-spacing: 0.05em;
+}
+
+.fts-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fts-panel-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.fts-panel-actions-end {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fts-lang-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.fts-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.fts-lang-toggle {
+  display: inline-flex;
+  border: 1.5px solid #8e44ad;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.fts-lang-toggle button {
+  border: none;
+  background: transparent;
+  color: #8e44ad;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.fts-lang-toggle button:hover:not(.active) {
+  background: rgba(142, 68, 173, 0.08);
+}
+
+.fts-lang-toggle button.active {
+  background: #8e44ad;
+  color: #ffffff;
+}
+
+.fts-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 20px;
+  background: #f3b61f;
+  color: #0a0b10;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.fts-btn-primary:hover {
+  filter: brightness(1.06);
+}
+
+.fts-btn-primary:disabled {
+  cursor: progress;
+  filter: grayscale(0.4);
+}
+
+.fts-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid #2a8bf2;
+  border-radius: 8px;
+  padding: 7.5px 18px;
+  background: transparent;
+  color: #2a8bf2;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.fts-btn-secondary:hover {
+  background: rgba(42, 139, 242, 0.08);
+}
+
+/* Challenge panel (Cloudscape tools panel) */
+
+.challenge-panel {
+  padding: 20px 20px 28px;
+  color: #16191f;
+  line-height: 1.5;
+}
+
+/* Keeps clear of Cloudscape's own close button, which sits in the tools
+   panel's top-right corner whatever direction our content is in. */
+.challenge-panel > .fts-panel-header {
+  padding-right: 40px;
+}
+
+.challenge-picker select {
+  border: 1.5px solid #d5dbdb;
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #ffffff;
+  color: #16191f;
+}
+
+.challenge-title {
+  margin: 14px 0 6px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.challenge-summary {
+  margin: 0;
+  font-size: 14px;
+  color: #414d5c;
+}
+
+.challenge-section {
+  margin: 18px 0 8px;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #8e44ad;
+}
+
+.challenge-panel[dir='rtl'] .challenge-section {
+  text-transform: none;
+}
+
+.challenge-objectives {
+  margin: 0;
+  padding-inline-start: 20px;
+  font-size: 14px;
+}
+
+.challenge-tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.challenge-task {
+  padding: 10px 12px;
+  border: 1px solid #e9ebed;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.challenge-task-pass {
+  border-color: #29ad32;
+  background: #f2fcf3;
+}
+
+.challenge-task-fail {
+  border-color: #d91515;
+  background: #fff7f7;
+}
+
+.challenge-task-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.challenge-task-icon {
+  font-weight: 800;
+  width: 1em;
+  flex-shrink: 0;
+  color: #687078;
+}
+
+.challenge-task-pass .challenge-task-icon {
+  color: #1d8102;
+}
+
+.challenge-task-fail .challenge-task-icon {
+  color: #d91515;
+}
+
+.challenge-task-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.challenge-task-result {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #414d5c;
+}
+
+.challenge-hint-toggle {
+  margin-top: 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #2a8bf2;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.challenge-hint {
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.challenge-hint p {
+  margin: 0 0 8px;
+}
+
+.challenge-snippet {
+  margin: 0;
+  padding: 10px;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: #0f1b2a;
+  color: #e9ebed;
+  font-family: Monaco, Menlo, Consolas, 'Courier New', monospace !important;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.challenge-complete {
+  margin-top: 16px;
+  padding: 14px;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(243, 182, 31, 0.18),
+    rgba(142, 68, 173, 0.12)
+  );
+  border: 1.5px solid #f3b61f;
+}
+
+.challenge-complete p {
+  margin: 6px 0 10px;
+  font-size: 14px;
+}
+
+/* Guided walkthrough */
+
+.tutorial-spotlight {
+  position: fixed;
+  border-radius: 12px;
+  border: 2px solid #0972d3;
+  box-shadow: 0 0 0 9999px rgba(15, 23, 42, 0.55);
+  pointer-events: none;
+  z-index: 2000;
+  transition:
+    top 0.25s ease,
+    left 0.25s ease,
+    width 0.25s ease,
+    height 0.25s ease;
+}
+
+.tutorial-panel {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  width: 380px;
+  max-width: calc(100vw - 48px);
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  padding: 20px;
+  z-index: 2100;
+}
+
+.tutorial-step-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #687078;
+  letter-spacing: 0.02em;
+}
+
+/* Anchored to .tutorial-panel (whose dir actually toggles) — see the EC2 lab's
+   styles.css for why a bare [dir='ltr'] ancestor selector doesn't work here. */
+.tutorial-panel[dir='rtl'] .tutorial-step-label {
+  letter-spacing: normal;
+}
+
+.tutorial-title {
+  margin: 6px 0 8px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #16191f;
+}
+
+.tutorial-description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #16191f;
+}
+
+.tutorial-tip {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: #f2f8fd;
+  border: 1px solid #99c7f2;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #16191f;
+}
+
+.tutorial-waiting {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: #fffbeb;
+  border: 1px solid #f3b61f;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #16191f;
+}

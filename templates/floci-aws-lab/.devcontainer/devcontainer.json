@@ -1,0 +1,56 @@
+{
+  "name": "FlipTheScript Labs — S3 + Lambda (Floci)",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "features": {
+    // Floci runs in Docker, and it starts every Lambda invocation as its own
+    // container through the Docker socket — so the Codespace needs its own
+    // Docker daemon.
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    // Students can also drive the same Floci from the terminal with `aws ...`.
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/shyim/devcontainers-features/bun:0": {}
+  },
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb"
+  },
+  // Points the AWS CLI (and any SDK script run in the terminal) at Floci.
+  // These are Floci's dummy credentials — nothing here touches a real AWS account.
+  "containerEnv": {
+    "AWS_ENDPOINT_URL": "http://localhost:4566",
+    "AWS_ACCESS_KEY_ID": "test",
+    "AWS_SECRET_ACCESS_KEY": "test",
+    "AWS_DEFAULT_REGION": "us-east-1",
+    "AWS_REGION": "us-east-1",
+    "AWS_PAGER": ""
+  },
+  "forwardPorts": [5173, 4566],
+  "portsAttributes": {
+    "5173": {
+      "label": "AWS Lab Console",
+      "onAutoForward": "openPreview"
+    },
+    "4566": {
+      "label": "Floci (AWS emulator)",
+      "onAutoForward": "silent"
+    }
+  },
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "postStartCommand": "bash .devcontainer/post-start.sh",
+  // Runs in a visible terminal and stays attached, so students can see (and
+  // restart) the console's dev server.
+  "postAttachCommand": {
+    "lab-console": "bun run dev"
+  },
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    },
+    "vscode": {
+      "extensions": [
+        "amazonwebservices.aws-toolkit-vscode",
+        "esbenp.prettier-vscode"
+      ]
+    }
+  }
+}
