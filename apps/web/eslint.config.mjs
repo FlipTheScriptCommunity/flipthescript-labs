@@ -13,12 +13,12 @@ export default [
       '.open-next/**/*',
       '.wrangler/**/*',
       '**/out-tsc',
-      // Static assets, including the pre-built lab bundles produced by
-      // `labs/<labId>/build.js` — generated code, not ours to lint.
+      // Static assets, including the pre-built guide bundles produced by
+      // `guides/<guideId>/build.js` — generated code, not ours to lint.
       'public/**/*',
-      // Standalone lab sources are their own Nx projects with their own deps
-      // and eslint config (labs/<labId>/eslint.config.mjs).
-      'labs/**/*',
+      // Standalone guide sources are their own Nx projects with their own deps
+      // and eslint config (guides/<guideId>/eslint.config.mjs).
+      'guides/**/*',
     ],
   },
 ];
