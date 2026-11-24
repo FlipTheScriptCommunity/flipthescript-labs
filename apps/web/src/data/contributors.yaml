@@ -13,7 +13,24 @@
 #
 # Invalid entries fail `bunx nx build web` with the entry index and field name.
 
-- name: FlipTheScript Community
-  role: קהילת הקוד הפתוח מאחורי הפרויקט
-  github: FlipTheScriptCommunity
-  website: https://github.com/FlipTheScriptCommunity
+- name: Moti Shaul
+  role: Founder & Developer
+  image: /contributors/moti-shaul.jpg
+  website: https://motishaul.website
+  linkedin: https://www.linkedin.com/in/moti-shaul/
+
+- name: Naor Peled
+  role: Co-Founder & Advisor
+  image: /contributors/naor-peled.jpg
+  linkedin: https://www.linkedin.com/in/naorpeled/
+
+- name: Daniel Kohav
+  role: Team Lead & Developer
+  image: /contributors/daniel-kohav.jpg
+  linkedin: https://www.linkedin.com/in/daniel-kohav/
+
+- name: Ben Levi
+  role: Lab Author
+  github: https://github.com/Ben-levi
+  website: https://ben-levi.github.io/Ben-levi/
+  linkedin: https://www.linkedin.com/in/ben-levi-442790240/
