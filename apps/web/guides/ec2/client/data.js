@@ -75,30 +75,122 @@ export const AMIS = [
 ];
 
 export const INSTANCE_TYPES = [
-  { value: 't2.micro', vcpu: 1, memory: '1 GiB', network: 'Low to Moderate', freeTier: true, price: 0.0116 },
-  { value: 't3.micro', vcpu: 2, memory: '1 GiB', network: 'Up to 5 Gigabit', freeTier: true, price: 0.0104 },
-  { value: 't3.small', vcpu: 2, memory: '2 GiB', network: 'Up to 5 Gigabit', freeTier: false, price: 0.0208 },
-  { value: 't3.medium', vcpu: 2, memory: '4 GiB', network: 'Up to 5 Gigabit', freeTier: false, price: 0.0416 },
-  { value: 'm5.large', vcpu: 2, memory: '8 GiB', network: 'Up to 10 Gigabit', freeTier: false, price: 0.096 },
-  { value: 'm5.xlarge', vcpu: 4, memory: '16 GiB', network: 'Up to 10 Gigabit', freeTier: false, price: 0.192 },
-  { value: 'c5.large', vcpu: 2, memory: '4 GiB', network: 'Up to 10 Gigabit', freeTier: false, price: 0.085 },
-  { value: 'c5.xlarge', vcpu: 4, memory: '8 GiB', network: 'Up to 10 Gigabit', freeTier: false, price: 0.17 },
-  { value: 'r5.large', vcpu: 2, memory: '16 GiB', network: 'Up to 10 Gigabit', freeTier: false, price: 0.126 },
+  {
+    value: 't2.micro',
+    vcpu: 1,
+    memory: '1 GiB',
+    network: 'Low to Moderate',
+    freeTier: true,
+    price: 0.0116,
+  },
+  {
+    value: 't3.micro',
+    vcpu: 2,
+    memory: '1 GiB',
+    network: 'Up to 5 Gigabit',
+    freeTier: true,
+    price: 0.0104,
+  },
+  {
+    value: 't3.small',
+    vcpu: 2,
+    memory: '2 GiB',
+    network: 'Up to 5 Gigabit',
+    freeTier: false,
+    price: 0.0208,
+  },
+  {
+    value: 't3.medium',
+    vcpu: 2,
+    memory: '4 GiB',
+    network: 'Up to 5 Gigabit',
+    freeTier: false,
+    price: 0.0416,
+  },
+  {
+    value: 'm5.large',
+    vcpu: 2,
+    memory: '8 GiB',
+    network: 'Up to 10 Gigabit',
+    freeTier: false,
+    price: 0.096,
+  },
+  {
+    value: 'm5.xlarge',
+    vcpu: 4,
+    memory: '16 GiB',
+    network: 'Up to 10 Gigabit',
+    freeTier: false,
+    price: 0.192,
+  },
+  {
+    value: 'c5.large',
+    vcpu: 2,
+    memory: '4 GiB',
+    network: 'Up to 10 Gigabit',
+    freeTier: false,
+    price: 0.085,
+  },
+  {
+    value: 'c5.xlarge',
+    vcpu: 4,
+    memory: '8 GiB',
+    network: 'Up to 10 Gigabit',
+    freeTier: false,
+    price: 0.17,
+  },
+  {
+    value: 'r5.large',
+    vcpu: 2,
+    memory: '16 GiB',
+    network: 'Up to 10 Gigabit',
+    freeTier: false,
+    price: 0.126,
+  },
 ];
 
-export const EXISTING_KEY_PAIRS = ['my-dev-keypair', 'prod-bastion-key', 'ci-runner-key'];
+export const EXISTING_KEY_PAIRS = [
+  'my-dev-keypair',
+  'prod-bastion-key',
+  'ci-runner-key',
+];
 
 export const VPCS = [
   { value: 'vpc-0a1b2c3d4e5f60001', label: 'vpc-0a1b2c3d4e5f60001 (default)' },
-  { value: 'vpc-0f9e8d7c6b5a40002', label: 'vpc-0f9e8d7c6b5a40002 (app-prod-vpc)' },
+  {
+    value: 'vpc-0f9e8d7c6b5a40002',
+    label: 'vpc-0f9e8d7c6b5a40002 (app-prod-vpc)',
+  },
 ];
 
 export const SUBNETS = [
-  { value: 'subnet-0111aaa1', label: 'subnet-0111aaa1 | us-east-1a | Default subnet' },
-  { value: 'subnet-0222bbb2', label: 'subnet-0222bbb2 | us-east-1b | Default subnet' },
-  { value: 'subnet-0333ccc3', label: 'subnet-0333ccc3 | us-east-1c | Default subnet' },
+  {
+    value: 'subnet-0111aaa1',
+    label: 'subnet-0111aaa1 | us-east-1a | Default subnet',
+  },
+  {
+    value: 'subnet-0222bbb2',
+    label: 'subnet-0222bbb2 | us-east-1b | Default subnet',
+  },
+  {
+    value: 'subnet-0333ccc3',
+    label: 'subnet-0333ccc3 | us-east-1c | Default subnet',
+  },
 ];
 
-export const VOLUME_TYPES = ['gp3', 'gp2', 'io1', 'io2', 'st1', 'sc1', 'standard'];
+export const VOLUME_TYPES = [
+  'gp3',
+  'gp2',
+  'io1',
+  'io2',
+  'st1',
+  'sc1',
+  'standard',
+];
 
-export const IAM_ROLES = ['None', 'EC2-S3-ReadOnly-Role', 'EC2-SSM-Role', 'AppServer-InstanceRole'];
+export const IAM_ROLES = [
+  'None',
+  'EC2-S3-ReadOnly-Role',
+  'EC2-SSM-Role',
+  'AppServer-InstanceRole',
+];

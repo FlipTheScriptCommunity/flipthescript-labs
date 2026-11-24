@@ -69,13 +69,18 @@ export default function App() {
     try {
       const parentWindow = window.parent;
       const parentDocument = parentWindow.document;
-      const headerHeight = parentDocument.querySelector('header')?.getBoundingClientRect().height ?? 0;
+      const headerHeight =
+        parentDocument.querySelector('header')?.getBoundingClientRect()
+          .height ?? 0;
       const rect = window.frameElement.getBoundingClientRect();
       const targetY = parentWindow.scrollY + rect.top - headerHeight - 8;
       parentWindow.scrollTo({ top: Math.max(targetY, 0), behavior: 'smooth' });
     } catch (e) {
       // Cross-origin or otherwise inaccessible — fall back to a plain scrollIntoView.
-      window.frameElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.frameElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
     }
   };
 
@@ -121,19 +126,26 @@ export default function App() {
           identity={{ href: '#', title: 'AWS' }}
           utilities={[
             { type: 'button', text: 'N. Virginia', iconName: 'multiscreen' },
-            { type: 'button', text: 'Help', iconName: 'status-info', variant: 'primary-button', onClick: openTutorial },
+            {
+              type: 'button',
+              text: 'Help',
+              iconName: 'status-info',
+              variant: 'primary-button',
+              onClick: openTutorial,
+            },
             { type: 'button', iconName: 'notification' },
             { type: 'button', iconName: 'settings' },
             {
               type: 'menu-dropdown',
               text: 'student@flipthescript.dev',
               iconName: 'user-profile',
-              items: [
-                { id: 'signout', text: 'Sign out' },
-              ],
+              items: [{ id: 'signout', text: 'Sign out' }],
             },
           ]}
-          i18nStrings={{ overflowMenuTriggerText: 'More', overflowMenuTitleText: 'All' }}
+          i18nStrings={{
+            overflowMenuTriggerText: 'More',
+            overflowMenuTitleText: 'All',
+          }}
         />
       </div>
       <AppLayout
@@ -157,9 +169,7 @@ export default function App() {
               {
                 type: 'section',
                 text: 'Images',
-                items: [
-                  { type: 'link', text: 'AMIs', href: '#' },
-                ],
+                items: [{ type: 'link', text: 'AMIs', href: '#' }],
               },
               {
                 type: 'section',
@@ -228,14 +238,22 @@ export default function App() {
                   </SpaceBetween>
                 </div>
                 <div id="section-summary" className="launch-summary">
-                  <SummaryPanel state={state} setState={setState} onLaunch={handleLaunch} launching={launching} error={error} />
+                  <SummaryPanel
+                    state={state}
+                    setState={setState}
+                    onLaunch={handleLaunch}
+                    launching={launching}
+                    error={error}
+                  />
                 </div>
               </div>
             </ContentLayout>
           )
         }
       />
-      {tutorialActive && !result && <TutorialOverlay key={tutorialKey} onExit={closeTutorial} />}
+      {tutorialActive && !result && (
+        <TutorialOverlay key={tutorialKey} onExit={closeTutorial} />
+      )}
     </>
   );
 }

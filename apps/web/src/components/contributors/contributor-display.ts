@@ -3,8 +3,7 @@
 import type { Contributor } from '@/data/contributors';
 
 export type AvatarSource =
-  | { kind: 'image'; src: string }
-  | { kind: 'initials'; initials: string };
+  { kind: 'image'; src: string } | { kind: 'initials'; initials: string };
 
 /** image → GitHub avatar → initials (Req 4.1–4.3). */
 export function getAvatarSource(contributor: Contributor): AvatarSource {

@@ -13,9 +13,8 @@ export function HeroSection() {
       </h1>
 
       <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground text-balance">
-        הדרכות ומעבדות מעשיות בחינם, שנבנות על ידי אנשי קהילה בשביל אנשי
-        קהילה — לומדים, מתנסים בסביבות אמיתיות, וצוברים ניסיון פרקטי בדרך
-        לקריירה בענן.
+        הדרכות ומעבדות מעשיות בחינם, שנבנות על ידי אנשי קהילה בשביל אנשי קהילה —
+        לומדים, מתנסים בסביבות אמיתיות, וצוברים ניסיון פרקטי בדרך לקריירה בענן.
       </p>
 
       <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">

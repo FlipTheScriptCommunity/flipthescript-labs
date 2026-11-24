@@ -22,16 +22,31 @@ export default function Storage({ state, setState }) {
   const addVolume = () => {
     setState((s) => ({
       ...s,
-      volumes: [...s.volumes, { device: `/dev/sdb`, size: '8', type: 'gp3', root: false }],
+      volumes: [
+        ...s.volumes,
+        { device: `/dev/sdb`, size: '8', type: 'gp3', root: false },
+      ],
     }));
   };
 
   const removeVolume = (index) => {
-    setState((s) => ({ ...s, volumes: s.volumes.filter((_, i) => i !== index) }));
+    setState((s) => ({
+      ...s,
+      volumes: s.volumes.filter((_, i) => i !== index),
+    }));
   };
 
   return (
-    <Container header={<Header variant="h2" description="Configure the root volume and any additional EBS volumes attached to your instance.">Configure storage</Header>}>
+    <Container
+      header={
+        <Header
+          variant="h2"
+          description="Configure the root volume and any additional EBS volumes attached to your instance."
+        >
+          Configure storage
+        </Header>
+      }
+    >
       <SpaceBetween size="l">
         {volumes.map((vol, i) => (
           <div key={i} className="volume-row">
@@ -50,7 +65,9 @@ export default function Storage({ state, setState }) {
               <FormField label="Volume type">
                 <Select
                   selectedOption={{ value: vol.type, label: vol.type }}
-                  onChange={(e) => updateVolume(i, 'type', e.detail.selectedOption.value)}
+                  onChange={(e) =>
+                    updateVolume(i, 'type', e.detail.selectedOption.value)
+                  }
                   options={VOLUME_TYPES.map((t) => ({ value: t, label: t }))}
                 />
               </FormField>
@@ -60,7 +77,12 @@ export default function Storage({ state, setState }) {
               </div>
               <div>
                 {!vol.root && (
-                  <Button iconName="remove" variant="icon" ariaLabel="Remove volume" onClick={() => removeVolume(i)} />
+                  <Button
+                    iconName="remove"
+                    variant="icon"
+                    ariaLabel="Remove volume"
+                    onClick={() => removeVolume(i)}
+                  />
                 )}
               </div>
             </ColumnLayout>

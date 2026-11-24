@@ -15,16 +15,33 @@ export default function InstanceType({ state, setState }) {
     label: it.value,
     description: `${it.vcpu} vCPU, ${it.memory}${it.freeTier ? ' — Free tier eligible' : ''}`,
   }));
-  const selectedOption = options.find((o) => o.value === state.instanceType) || options[0];
-  const details = INSTANCE_TYPES.find((it) => it.value === state.instanceType) || INSTANCE_TYPES[0];
+  const selectedOption =
+    options.find((o) => o.value === state.instanceType) || options[0];
+  const details =
+    INSTANCE_TYPES.find((it) => it.value === state.instanceType) ||
+    INSTANCE_TYPES[0];
 
   return (
-    <Container header={<Header variant="h2" description="Instance type determines the hardware of the host computer used for your instance.">Instance type</Header>}>
+    <Container
+      header={
+        <Header
+          variant="h2"
+          description="Instance type determines the hardware of the host computer used for your instance."
+        >
+          Instance type
+        </Header>
+      }
+    >
       <SpaceBetween size="l">
         <FormField label="Instance type">
           <Select
             selectedOption={selectedOption}
-            onChange={(e) => setState((s) => ({ ...s, instanceType: e.detail.selectedOption.value }))}
+            onChange={(e) =>
+              setState((s) => ({
+                ...s,
+                instanceType: e.detail.selectedOption.value,
+              }))
+            }
             options={options}
           />
         </FormField>

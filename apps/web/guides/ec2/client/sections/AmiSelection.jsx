@@ -14,10 +14,15 @@ function AmiTile({ ami, selected, onSelect }) {
       aria-checked={selected}
       tabIndex={0}
       onClick={() => onSelect(ami.key)}
-      onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onSelect(ami.key)}
+      onKeyDown={(e) =>
+        (e.key === 'Enter' || e.key === ' ') && onSelect(ami.key)
+      }
       className={`ami-tile${selected ? ' ami-tile-selected' : ''}`}
     >
-      <div className="ami-tile-logo" style={{ backgroundColor: ami.badgeColor }}>
+      <div
+        className="ami-tile-logo"
+        style={{ backgroundColor: ami.badgeColor }}
+      >
         {ami.initials}
       </div>
       <div className="ami-tile-body">
@@ -38,7 +43,10 @@ export default function AmiSelection({ state, setState }) {
   return (
     <Container
       header={
-        <Header variant="h2" description="An AMI is a template that contains the software configuration required to launch your instance.">
+        <Header
+          variant="h2"
+          description="An AMI is a template that contains the software configuration required to launch your instance."
+        >
           Application and OS Images (Amazon Machine Image)
         </Header>
       }
@@ -47,7 +55,12 @@ export default function AmiSelection({ state, setState }) {
         <Box variant="h4">Quick Start</Box>
         <div className="ami-tile-grid">
           {AMIS.map((ami) => (
-            <AmiTile key={ami.key} ami={ami} selected={ami.key === state.amiKey} onSelect={(key) => setState((s) => ({ ...s, amiKey: key }))} />
+            <AmiTile
+              key={ami.key}
+              ami={ami}
+              selected={ami.key === state.amiKey}
+              onSelect={(key) => setState((s) => ({ ...s, amiKey: key }))}
+            />
           ))}
         </div>
 
@@ -70,7 +83,8 @@ export default function AmiSelection({ state, setState }) {
           </ColumnLayout>
           {selected.freeTier && (
             <Box margin={{ top: 's' }} color="text-status-success">
-              Free tier eligible: This AMI is free tier eligible when used with a compatible instance type.
+              Free tier eligible: This AMI is free tier eligible when used with
+              a compatible instance type.
             </Box>
           )}
         </div>

@@ -13,8 +13,12 @@ export default function SuccessView({ result, onBack }) {
   return (
     <ContentLayout header={<Header variant="h1">Launch an instance</Header>}>
       <SpaceBetween size="l">
-        <Alert type="success" header="Successfully initiated launch of instance">
-          The following instance launch{result.instanceIds.length > 1 ? 'es have' : ' has'} been initiated:{' '}
+        <Alert
+          type="success"
+          header="Successfully initiated launch of instance"
+        >
+          The following instance launch
+          {result.instanceIds.length > 1 ? 'es have' : ' has'} been initiated:{' '}
           {result.instanceIds.map((id, i) => (
             <React.Fragment key={id}>
               {i > 0 && ', '}
@@ -48,7 +52,8 @@ export default function SuccessView({ result, onBack }) {
               <Link href="#" onFollow={(e) => e.preventDefault()}>
                 Connect to your instance
               </Link>{' '}
-              — connect via EC2 Instance Connect, SSH client, or session manager.
+              — connect via EC2 Instance Connect, SSH client, or session
+              manager.
             </Box>
             <Box>
               <Link href="#" onFollow={(e) => e.preventDefault()}>

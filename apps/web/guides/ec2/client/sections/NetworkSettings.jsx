@@ -24,7 +24,11 @@ export default function NetworkSettings({ state, setState }) {
         <Header
           variant="h2"
           description="Configure the virtual network, subnet, and firewall (security group) for your instance."
-          actions={<Button onClick={() => setEditing((e) => !e)}>{editing ? 'Collapse' : 'Edit'}</Button>}
+          actions={
+            <Button onClick={() => setEditing((e) => !e)}>
+              {editing ? 'Collapse' : 'Edit'}
+            </Button>
+          }
         >
           Network settings
         </Header>
@@ -37,7 +41,9 @@ export default function NetworkSettings({ state, setState }) {
           <FormField label="VPC — required">
             <Select
               selectedOption={vpcOption}
-              onChange={(e) => setState((s) => ({ ...s, vpc: e.detail.selectedOption.value }))}
+              onChange={(e) =>
+                setState((s) => ({ ...s, vpc: e.detail.selectedOption.value }))
+              }
               options={VPCS}
             />
           </FormField>
@@ -46,7 +52,12 @@ export default function NetworkSettings({ state, setState }) {
             <Select
               placeholder="No preference (default subnet in any availability zone)"
               selectedOption={subnetOption}
-              onChange={(e) => setState((s) => ({ ...s, subnet: e.detail.selectedOption.value }))}
+              onChange={(e) =>
+                setState((s) => ({
+                  ...s,
+                  subnet: e.detail.selectedOption.value,
+                }))
+              }
               options={SUBNETS}
             />
           </FormField>
@@ -54,7 +65,9 @@ export default function NetworkSettings({ state, setState }) {
           <FormField label="Auto-assign public IP">
             <RadioGroup
               value={state.autoAssignIp}
-              onChange={(e) => setState((s) => ({ ...s, autoAssignIp: e.detail.value }))}
+              onChange={(e) =>
+                setState((s) => ({ ...s, autoAssignIp: e.detail.value }))
+              }
               items={[
                 { value: 'enable', label: 'Enable' },
                 { value: 'disable', label: 'Disable' },
@@ -65,7 +78,9 @@ export default function NetworkSettings({ state, setState }) {
           <FormField label="Firewall (security groups)">
             <RadioGroup
               value={state.securityGroupMode}
-              onChange={(e) => setState((s) => ({ ...s, securityGroupMode: e.detail.value }))}
+              onChange={(e) =>
+                setState((s) => ({ ...s, securityGroupMode: e.detail.value }))
+              }
               items={[
                 { value: 'create', label: 'Create security group' },
                 { value: 'existing', label: 'Select existing security group' },
@@ -79,14 +94,24 @@ export default function NetworkSettings({ state, setState }) {
                 <FormField label="Security group name">
                   <Input
                     value={state.securityGroupName}
-                    onChange={(e) => setState((s) => ({ ...s, securityGroupName: e.detail.value }))}
+                    onChange={(e) =>
+                      setState((s) => ({
+                        ...s,
+                        securityGroupName: e.detail.value,
+                      }))
+                    }
                     nativeInputAttributes={{ dir: 'auto' }}
                   />
                 </FormField>
                 <FormField label="Description">
                   <Input
                     value={state.securityGroupDescription}
-                    onChange={(e) => setState((s) => ({ ...s, securityGroupDescription: e.detail.value }))}
+                    onChange={(e) =>
+                      setState((s) => ({
+                        ...s,
+                        securityGroupDescription: e.detail.value,
+                      }))
+                    }
                     nativeInputAttributes={{ dir: 'auto' }}
                   />
                 </FormField>
@@ -109,11 +134,22 @@ export default function NetworkSettings({ state, setState }) {
                   </div>
                   <FormField label="Source">
                     <Select
-                      selectedOption={{ value: state.sshSource, label: state.sshSource }}
-                      onChange={(e) => setState((s) => ({ ...s, sshSource: e.detail.selectedOption.value }))}
+                      selectedOption={{
+                        value: state.sshSource,
+                        label: state.sshSource,
+                      }}
+                      onChange={(e) =>
+                        setState((s) => ({
+                          ...s,
+                          sshSource: e.detail.selectedOption.value,
+                        }))
+                      }
                       options={[
                         { value: 'My IP', label: 'My IP' },
-                        { value: 'Anywhere (0.0.0.0/0)', label: 'Anywhere (0.0.0.0/0)' },
+                        {
+                          value: 'Anywhere (0.0.0.0/0)',
+                          label: 'Anywhere (0.0.0.0/0)',
+                        },
                         { value: 'Custom', label: 'Custom' },
                       ]}
                     />

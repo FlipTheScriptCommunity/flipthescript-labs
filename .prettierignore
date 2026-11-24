@@ -8,7 +8,7 @@
 **/.wrangler
 templates/*/node_modules
 
-# Generated static lab bundles (built by Bun, not hand-formatted) — see
-# apps/web/labs/<id>/README.md
-apps/web/public/labs/*/bundle.js
-apps/web/public/labs/*/bundle.css
+# Generated static guide bundles (built by Bun, not hand-formatted) — see
+# apps/web/guides/<id>/README.md
+apps/web/public/guides/*/bundle.js
+apps/web/public/guides/*/bundle.css

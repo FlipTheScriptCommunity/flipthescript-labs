@@ -33,7 +33,10 @@ export function GuideEmbed({ src, title }: GuideEmbedProps) {
   }, [isFullscreen]);
 
   return (
-    <div dir="ltr" className={cn('relative', isFullscreen && 'fixed inset-0 z-50 bg-card')}>
+    <div
+      dir="ltr"
+      className={cn('relative', isFullscreen && 'fixed inset-0 z-50 bg-card')}
+    >
       {/*
         Bottom-right on purpose: the embedded AWS console has its own top nav
         utilities hugging the top-right corner, so a toggle placed there would
@@ -88,13 +91,21 @@ export function GuideEmbed({ src, title }: GuideEmbedProps) {
         </button>
       </div>
 
-      <div className={cn(!isFullscreen && 'overflow-hidden rounded-xl border border-border bg-card shadow-2xl')}>
+      <div
+        className={cn(
+          !isFullscreen &&
+            'overflow-hidden rounded-xl border border-border bg-card shadow-2xl',
+        )}
+      >
         <iframe
           src={src}
           title={title}
           loading="lazy"
           sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-          className={cn('w-full border-0', isFullscreen ? 'h-screen' : 'h-[85vh] min-h-[720px]')}
+          className={cn(
+            'w-full border-0',
+            isFullscreen ? 'h-screen' : 'h-[85vh] min-h-[720px]',
+          )}
         />
       </div>
     </div>

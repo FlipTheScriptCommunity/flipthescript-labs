@@ -8,8 +8,8 @@ browser — no AWS account, no backend, no cost.
 This file is the playbook for adding a new guide. Follow it (and copy from the
 existing guides) so every guide looks and behaves the same.
 
-> **Naming:** these step-by-step console simulations are *guides* (הדרכות).
-> The name *labs* (מעבדות) is reserved for the upcoming multi-service
+> **Naming:** these step-by-step console simulations are _guides_ (הדרכות).
+> The name _labs_ (מעבדות) is reserved for the upcoming multi-service
 > challenges that run against a local Floci environment and check the
 > solution automatically.
 
@@ -17,8 +17,8 @@ existing guides) so every guide looks and behaves the same.
 
 All six live in the `aws-foundations` track.
 
-| Guide    | Source                 | Built output                  | Flow                                                                   |
-| ------ | ---------------------- | ----------------------------- | ---------------------------------------------------------------------- |
+| Guide  | Source                   | Built output                    | Flow                                                                   |
+| ------ | ------------------------ | ------------------------------- | ---------------------------------------------------------------------- |
 | EC2    | `apps/web/guides/ec2`    | `apps/web/public/guides/ec2`    | Launch an instance → success view                                      |
 | S3     | `apps/web/guides/s3`     | `apps/web/public/guides/s3`     | Create bucket → objects list → upload a file → upload success          |
 | VPC    | `apps/web/guides/vpc`    | `apps/web/public/guides/vpc`    | Create VPC ("VPC and more") with a live resource map → result view     |

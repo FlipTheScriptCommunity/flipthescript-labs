@@ -39,10 +39,18 @@ export default function NameAndTags({ state, setState }) {
           />
         </FormField>
 
-        <FormField label="Additional tags" description="Optional key/value pairs to help identify and organize this resource.">
+        <FormField
+          label="Additional tags"
+          description="Optional key/value pairs to help identify and organize this resource."
+        >
           <SpaceBetween size="xs">
             {tags.map((tag, i) => (
-              <SpaceBetween key={i} direction="horizontal" size="xs" alignItems="center">
+              <SpaceBetween
+                key={i}
+                direction="horizontal"
+                size="xs"
+                alignItems="center"
+              >
                 <Input
                   placeholder="Key"
                   value={tag.key}
@@ -55,7 +63,12 @@ export default function NameAndTags({ state, setState }) {
                   onChange={(e) => updateTag(i, 'value', e.detail.value)}
                   nativeInputAttributes={{ dir: 'auto' }}
                 />
-                <Button iconName="close" variant="icon" onClick={() => removeTag(i)} ariaLabel="Remove tag" />
+                <Button
+                  iconName="close"
+                  variant="icon"
+                  onClick={() => removeTag(i)}
+                  ariaLabel="Remove tag"
+                />
               </SpaceBetween>
             ))}
             <Box>

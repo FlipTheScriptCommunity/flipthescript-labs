@@ -8,19 +8,19 @@ The main design constraint is the deploy target. `apps/web` runs on Cloudflare W
 
 ### Key decisions
 
-| Decision | Choice | Rationale |
-| --- | --- | --- |
-| YAML loading | Import the `.yaml` file as a string through a 4-line local bundler loader (`loaders/raw-text-loader.cjs`), registered for both Turbopack (`next build`, the default in Next 16) and webpack (`next dev --webpack`). | The YAML text becomes a string constant in the server module graph, so no filesystem access happens at build or request time. Dev hot-reloads when the YAML is edited. No third-party loader is needed, and both bundlers share one code path. |
-| Rejected: `fs.readFileSync` + `force-static` | Not used | This only works if the Worker never renders the page. With the default no-op OpenNext cache that isn't guaranteed, and workerd has no access to `src/data/contributors.yaml`. It would violate Req 3.8 on a cache miss. |
-| Rejected: codegen script (YAML → JSON/TS) | Not used | It adds a pre-step to `dev`, `build`, `lint`, and `test`. The generated file would have to be committed (drift risk) or gitignored (CI ordering risk). |
-| Rejected: Turbopack import attributes / `type: 'raw'` rules | Not used | Import attributes are Turbopack-only and break `next dev --webpack`. Module `type` rules are documented for newer releases and can't be relied on for `next@~16.1.6`. |
-| Parse location | `parseContributors()` runs at module scope in `src/data/contributors.ts`, which only the server page imports. | During `next build`, the static prerender evaluates the module, so invalid data throws and fails the Build (Req 3.4–3.7). The client bundles never import it (Req 3.9). |
-| Rendering | `export const dynamic = 'force-static'` on the page. Page and card are Server Components with no `'use client'`. | This guarantees prerendering at build time, so validation always runs during the Build. The page ships only HTML/RSC output to the browser. |
-| `github` field | Accepts a username, `@username`, or a GitHub profile URL (`github.com/u`, `https://github.com/u`, `https://www.github.com/u/`). It is normalized to the bare username at parse time. | Maintainers will paste either form. Downstream code (avatar URL, profile link) only ever sees a validated username. |
-| URL fields | `linkedin`, `website`, and `x` must be absolute `http(s)` URLs. `image` must be an absolute `http(s)` URL or a root-relative path under `/contributors/`. | This blocks `javascript:` and other unsafe schemes in `href`/`src` and catches typos early. It goes slightly beyond Req 3.5 and is reported with the same index + field error. |
-| Unknown keys | Rejected with index + key name | A typo like `linkdin:` would otherwise silently drop a link. This also goes slightly beyond the requirements. |
-| Icons | Lucide `Globe` for website. Inline SVG components for GitHub, LinkedIn, and X. | The installed `lucide-react@1.25.0` has no brand icons (checked in `node_modules/lucide-react/dist/esm/icons`: no `github`, `linkedin`, or `twitter`; `x` is the close glyph). The brand paths come from Simple Icons (CC0). |
-| Images | Plain `<img>` | `next/image` on Workers needs an image loader plus remote-pattern config for `github.com`. Plain `<img>` keeps the page fully static, as Req 4.4 asks. |
+| Decision                                                    | Choice                                                                                                                                                                                                              | Rationale                                                                                                                                                                                                                                      |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| YAML loading                                                | Import the `.yaml` file as a string through a 4-line local bundler loader (`loaders/raw-text-loader.cjs`), registered for both Turbopack (`next build`, the default in Next 16) and webpack (`next dev --webpack`). | The YAML text becomes a string constant in the server module graph, so no filesystem access happens at build or request time. Dev hot-reloads when the YAML is edited. No third-party loader is needed, and both bundlers share one code path. |
+| Rejected: `fs.readFileSync` + `force-static`                | Not used                                                                                                                                                                                                            | This only works if the Worker never renders the page. With the default no-op OpenNext cache that isn't guaranteed, and workerd has no access to `src/data/contributors.yaml`. It would violate Req 3.8 on a cache miss.                        |
+| Rejected: codegen script (YAML → JSON/TS)                   | Not used                                                                                                                                                                                                            | It adds a pre-step to `dev`, `build`, `lint`, and `test`. The generated file would have to be committed (drift risk) or gitignored (CI ordering risk).                                                                                         |
+| Rejected: Turbopack import attributes / `type: 'raw'` rules | Not used                                                                                                                                                                                                            | Import attributes are Turbopack-only and break `next dev --webpack`. Module `type` rules are documented for newer releases and can't be relied on for `next@~16.1.6`.                                                                          |
+| Parse location                                              | `parseContributors()` runs at module scope in `src/data/contributors.ts`, which only the server page imports.                                                                                                       | During `next build`, the static prerender evaluates the module, so invalid data throws and fails the Build (Req 3.4–3.7). The client bundles never import it (Req 3.9).                                                                        |
+| Rendering                                                   | `export const dynamic = 'force-static'` on the page. Page and card are Server Components with no `'use client'`.                                                                                                    | This guarantees prerendering at build time, so validation always runs during the Build. The page ships only HTML/RSC output to the browser.                                                                                                    |
+| `github` field                                              | Accepts a username, `@username`, or a GitHub profile URL (`github.com/u`, `https://github.com/u`, `https://www.github.com/u/`). It is normalized to the bare username at parse time.                                | Maintainers will paste either form. Downstream code (avatar URL, profile link) only ever sees a validated username.                                                                                                                            |
+| URL fields                                                  | `linkedin`, `website`, and `x` must be absolute `http(s)` URLs. `image` must be an absolute `http(s)` URL or a root-relative path under `/contributors/`.                                                           | This blocks `javascript:` and other unsafe schemes in `href`/`src` and catches typos early. It goes slightly beyond Req 3.5 and is reported with the same index + field error.                                                                 |
+| Unknown keys                                                | Rejected with index + key name                                                                                                                                                                                      | A typo like `linkdin:` would otherwise silently drop a link. This also goes slightly beyond the requirements.                                                                                                                                  |
+| Icons                                                       | Lucide `Globe` for website. Inline SVG components for GitHub, LinkedIn, and X.                                                                                                                                      | The installed `lucide-react@1.25.0` has no brand icons (checked in `node_modules/lucide-react/dist/esm/icons`: no `github`, `linkedin`, or `twitter`; `x` is the close glyph). The brand paths come from Simple Icons (CC0).                   |
+| Images                                                      | Plain `<img>`                                                                                                                                                                                                       | `next/image` on Workers needs an image loader plus remote-pattern config for `github.com`. Plain `<img>` keeps the page fully static, as Req 4.4 asks.                                                                                         |
 
 ## Architecture
 
@@ -139,23 +139,30 @@ import { parse, YAMLParseError } from 'yaml';
 
 export interface Contributor {
   name: string;
-  image?: string;    // absolute http(s) URL or "/contributors/<file>"
+  image?: string; // absolute http(s) URL or "/contributors/<file>"
   role?: string;
-  github?: string;   // normalized GitHub username (no URL, no "@")
+  github?: string; // normalized GitHub username (no URL, no "@")
   linkedin?: string; // absolute http(s) URL
-  website?: string;  // absolute http(s) URL
-  x?: string;        // absolute http(s) URL
+  website?: string; // absolute http(s) URL
+  x?: string; // absolute http(s) URL
 }
 
-export const OPTIONAL_FIELDS = ['image', 'role', 'github', 'linkedin', 'website', 'x'] as const;
+export const OPTIONAL_FIELDS = [
+  'image',
+  'role',
+  'github',
+  'linkedin',
+  'website',
+  'x',
+] as const;
 export type OptionalField = (typeof OPTIONAL_FIELDS)[number];
 export type ContributorField = 'name' | OptionalField;
 
 export class ContributorsValidationError extends Error {
   constructor(
     message: string,
-    readonly index?: number,          // 0-based entry index, when entry-specific
-    readonly field?: string,          // offending field/key, when field-specific
+    readonly index?: number, // 0-based entry index, when entry-specific
+    readonly field?: string, // offending field/key, when field-specific
   ) {
     super(message);
     this.name = 'ContributorsValidationError';
@@ -236,14 +243,16 @@ These pure functions keep the card component thin and are what the unit tests co
 import type { Contributor } from '@/data/contributors';
 
 export type AvatarSource =
-  | { kind: 'image'; src: string }
-  | { kind: 'initials'; initials: string };
+  { kind: 'image'; src: string } | { kind: 'initials'; initials: string };
 
 /** image → GitHub avatar → initials (Req 4.1–4.3). */
 export function getAvatarSource(contributor: Contributor): AvatarSource {
   if (contributor.image) return { kind: 'image', src: contributor.image };
   if (contributor.github) {
-    return { kind: 'image', src: `https://github.com/${contributor.github}.png` };
+    return {
+      kind: 'image',
+      src: `https://github.com/${contributor.github}.png`,
+    };
   }
   return { kind: 'initials', initials: getInitials(contributor.name) };
 }
@@ -264,19 +273,24 @@ export interface SocialLink {
 }
 
 /** Fixed display order, independent of YAML key order. */
-export const SOCIAL_PLATFORMS: readonly SocialPlatform[] = ['github', 'linkedin', 'website', 'x'];
+export const SOCIAL_PLATFORMS: readonly SocialPlatform[] = [
+  'github',
+  'linkedin',
+  'website',
+  'x',
+];
 
 export function getSocialLinks(contributor: Contributor): SocialLink[];
 ```
 
 `getSocialLinks` mapping (Req 5.3–5.7, 5.9). Each label ends with "(נפתח בכרטיסייה חדשה)" to announce the `target="_blank"` behavior.
 
-| Platform | `href` | `label` |
-| --- | --- | --- |
-| github | `https://github.com/${github}` | `הפרופיל של ${name} ב-GitHub (נפתח בכרטיסייה חדשה)` |
-| linkedin | `linkedin` value | `הפרופיל של ${name} ב-LinkedIn (נפתח בכרטיסייה חדשה)` |
-| website | `website` value | `האתר האישי של ${name} (נפתח בכרטיסייה חדשה)` |
-| x | `x` value | `הפרופיל של ${name} ב-X (נפתח בכרטיסייה חדשה)` |
+| Platform | `href`                         | `label`                                               |
+| -------- | ------------------------------ | ----------------------------------------------------- |
+| github   | `https://github.com/${github}` | `הפרופיל של ${name} ב-GitHub (נפתח בכרטיסייה חדשה)`   |
+| linkedin | `linkedin` value               | `הפרופיל של ${name} ב-LinkedIn (נפתח בכרטיסייה חדשה)` |
+| website  | `website` value                | `האתר האישי של ${name} (נפתח בכרטיסייה חדשה)`         |
+| x        | `x` value                      | `הפרופיל של ${name} ב-X (נפתח בכרטיסייה חדשה)`        |
 
 ### Icons: `src/components/contributors/social-icons.tsx`
 
@@ -299,7 +313,13 @@ const LINK_BACKGROUNDS = {
   x: 'bg-accent-purple',
 } as const;
 
-export function ContributorCard({ contributor, index }: { contributor: Contributor; index: number }) {
+export function ContributorCard({
+  contributor,
+  index,
+}: {
+  contributor: Contributor;
+  index: number;
+}) {
   const avatar = getAvatarSource(contributor);
   const links = getSocialLinks(contributor);
   const border = AVATAR_BORDERS[index % AVATAR_BORDERS.length];
@@ -308,23 +328,40 @@ export function ContributorCard({ contributor, index }: { contributor: Contribut
   return (
     <article className="flex h-full flex-col items-center rounded-xl border border-border bg-card p-6 text-center transition-colors hover:border-primary">
       {avatar.kind === 'image' ? (
-        <img src={avatar.src} alt={contributor.name} width={96} height={96}
-             loading="lazy" decoding="async" className={`${circle} object-cover`} />
+        <img
+          src={avatar.src}
+          alt={contributor.name}
+          width={96}
+          height={96}
+          loading="lazy"
+          decoding="async"
+          className={`${circle} object-cover`}
+        />
       ) : (
-        <div aria-hidden="true" className={`${circle} flex items-center justify-center bg-muted text-2xl font-bold`}>
+        <div
+          aria-hidden="true"
+          className={`${circle} flex items-center justify-center bg-muted text-2xl font-bold`}
+        >
           {avatar.initials}
         </div>
       )}
       <h2 className="mt-4 text-lg font-bold">{contributor.name}</h2>
-      {contributor.role && <p className="mt-1 text-sm text-muted-foreground">{contributor.role}</p>}
+      {contributor.role && (
+        <p className="mt-1 text-sm text-muted-foreground">{contributor.role}</p>
+      )}
       {links.length > 0 && (
         <ul className="mt-4 flex flex-wrap justify-center gap-3">
           {links.map((link) => {
             const Icon = SOCIAL_ICONS[link.platform];
             return (
               <li key={link.platform}>
-                <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}
-                   className={`inline-flex size-9 items-center justify-center rounded-full ${LINK_BACKGROUNDS[link.platform]} text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring`}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className={`inline-flex size-9 items-center justify-center rounded-full ${LINK_BACKGROUNDS[link.platform]} text-white transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring`}
+                >
                   <Icon className="size-4" />
                 </a>
               </li>
@@ -364,7 +401,9 @@ export default function ContributorsPage() {
       <SiteHeader />
       <main>
         <section className="mx-auto max-w-4xl px-6 pt-20 pb-8 text-center">
-          <h1 className="text-4xl font-black text-balance sm:text-5xl">משתתפים</h1>
+          <h1 className="text-4xl font-black text-balance sm:text-5xl">
+            משתתפים
+          </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground text-balance">
             האנשים שבונים את FlipTheScript Labs ומשתפים את הידע שלהם עם הקהילה.
           </p>
@@ -434,15 +473,15 @@ export default defineConfig(() => ({
 
 `Contributor` (output of `parseContributors`):
 
-| Field | Type | Required | Constraints after parsing |
-| --- | --- | --- | --- |
-| `name` | `string` | yes | Trimmed, non-empty |
-| `role` | `string` | no | Trimmed, non-empty |
-| `image` | `string` | no | `http(s)://…` URL, or `/contributors/<path>` with no `..` |
-| `github` | `string` | no | Normalized GitHub username (1–39 chars, alphanumeric or single inner hyphens) |
-| `linkedin` | `string` | no | Absolute `http(s)` URL |
-| `website` | `string` | no | Absolute `http(s)` URL |
-| `x` | `string` | no | Absolute `http(s)` URL |
+| Field      | Type     | Required | Constraints after parsing                                                     |
+| ---------- | -------- | -------- | ----------------------------------------------------------------------------- |
+| `name`     | `string` | yes      | Trimmed, non-empty                                                            |
+| `role`     | `string` | no       | Trimmed, non-empty                                                            |
+| `image`    | `string` | no       | `http(s)://…` URL, or `/contributors/<path>` with no `..`                     |
+| `github`   | `string` | no       | Normalized GitHub username (1–39 chars, alphanumeric or single inner hyphens) |
+| `linkedin` | `string` | no       | Absolute `http(s)` URL                                                        |
+| `website`  | `string` | no       | Absolute `http(s)` URL                                                        |
+| `x`        | `string` | no       | Absolute `http(s)` URL                                                        |
 
 Derived view models: `AvatarSource` and `SocialLink`, described in Components above.
 
@@ -450,69 +489,69 @@ Derived view models: `AvatarSource` and `SocialLink`, described in Components ab
 
 All data errors surface at build time. The page has no runtime error paths.
 
-| Condition | Where detected | Result |
-| --- | --- | --- |
-| YAML syntax error | `parseContributors` (wraps `YAMLParseError`) | `ContributorsValidationError` with the parser's line/column message, build fails |
-| Top-level not a list (incl. empty file) | `parseContributors` | Error "must contain a list of contributors", build fails |
-| Entry not a mapping | `parseContributors` | Error with `index`, build fails |
-| Unknown key | `parseContributors` | Error with `index` + `field = key`, build fails |
-| Missing/empty/non-string `name` | `parseContributors` | Error with `index` + `field = 'name'`, build fails (Req 3.4) |
-| Optional field present but empty/whitespace/non-string/null | `parseContributors` | Error with `index` + `field`, build fails (Req 3.5) |
-| Malformed `github` / non-http(s) URL / bad `image` path | `parseContributors` | Error with `index` + `field`, build fails |
-| Empty list `[]` | n/a | Valid. The page renders the hero and an empty grid. |
-| Remote image or GitHub avatar fails to load in the browser | Browser | The browser shows the broken image with `alt` = name. A client-side `onError` fallback to initials is out of scope, since it would need a Client Component and isn't required. |
+| Condition                                                   | Where detected                               | Result                                                                                                                                                                         |
+| ----------------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| YAML syntax error                                           | `parseContributors` (wraps `YAMLParseError`) | `ContributorsValidationError` with the parser's line/column message, build fails                                                                                               |
+| Top-level not a list (incl. empty file)                     | `parseContributors`                          | Error "must contain a list of contributors", build fails                                                                                                                       |
+| Entry not a mapping                                         | `parseContributors`                          | Error with `index`, build fails                                                                                                                                                |
+| Unknown key                                                 | `parseContributors`                          | Error with `index` + `field = key`, build fails                                                                                                                                |
+| Missing/empty/non-string `name`                             | `parseContributors`                          | Error with `index` + `field = 'name'`, build fails (Req 3.4)                                                                                                                   |
+| Optional field present but empty/whitespace/non-string/null | `parseContributors`                          | Error with `index` + `field`, build fails (Req 3.5)                                                                                                                            |
+| Malformed `github` / non-http(s) URL / bad `image` path     | `parseContributors`                          | Error with `index` + `field`, build fails                                                                                                                                      |
+| Empty list `[]`                                             | n/a                                          | Valid. The page renders the hero and an empty grid.                                                                                                                            |
+| Remote image or GitHub avatar fails to load in the browser  | Browser                                      | The browser shows the broken image with `alt` = name. A client-side `onError` fallback to initials is out of scope, since it would need a Client Component and isn't required. |
 
 Failure propagation: `contributors.ts` throws at module evaluation. Next's static prerender of `/contributors` reports the error with the message above and `next build` exits non-zero (Req 3.4–3.6). The same throw shows up as an error overlay in `next dev`.
 
 ## Correctness Properties
 
-*A property is a characteristic or behavior that should hold true across all valid executions of a system-essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees.*
+_A property is a characteristic or behavior that should hold true across all valid executions of a system-essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees._
 
 ### Property 1: Parse round trip preserves entries and order
 
-*For any* list of valid contributor records (random names including Hebrew and multi-word strings, with random subsets of valid optional fields), serializing the list with `yaml.stringify` and passing the result to `parseContributors` returns a list of the same length, in the same order. Each record deep-equals its input with string values trimmed, `github` in normalized username form, and absent optional fields absent from the output.
+_For any_ list of valid contributor records (random names including Hebrew and multi-word strings, with random subsets of valid optional fields), serializing the list with `yaml.stringify` and passing the result to `parseContributors` returns a list of the same length, in the same order. Each record deep-equals its input with string values trimmed, `github` in normalized username form, and absent optional fields absent from the output.
 
 **Validates: Requirements 2.5, 3.3**
 
 ### Property 2: Invalid entries are reported with their location
 
-*For any* list of valid contributor records, any insertion index `i`, and any field `f` in `{name, image, role, github, linkedin, website, x}` paired with an invalid value for `f` (for `name`: missing, non-string, empty, or whitespace-only; for optional fields: present but non-string, null, empty, or whitespace-only), inserting an otherwise-valid entry with that invalid `f` at index `i` makes `parseContributors` throw a `ContributorsValidationError` whose `index` is `i` and whose `field` is `f`.
+_For any_ list of valid contributor records, any insertion index `i`, and any field `f` in `{name, image, role, github, linkedin, website, x}` paired with an invalid value for `f` (for `name`: missing, non-string, empty, or whitespace-only; for optional fields: present but non-string, null, empty, or whitespace-only), inserting an otherwise-valid entry with that invalid `f` at index `i` makes `parseContributors` throw a `ContributorsValidationError` whose `index` is `i` and whose `field` is `f`.
 
 **Validates: Requirements 3.4, 3.5**
 
 ### Property 3: Non-list documents are rejected
 
-*For any* YAML document whose top-level value is not a sequence (null, boolean, number, string, or mapping), `parseContributors` throws a `ContributorsValidationError`.
+_For any_ YAML document whose top-level value is not a sequence (null, boolean, number, string, or mapping), `parseContributors` throws a `ContributorsValidationError`.
 
 **Validates: Requirements 3.6**
 
 ### Property 4: GitHub username normalization
 
-*For any* valid GitHub username `u`, `normalizeGithubUsername` returns `u` for each accepted form (`u`, `@u`, `github.com/u`, `https://github.com/u`, `http://www.github.com/u/`). *For any* string `s` for which it returns a username `v`, `normalizeGithubUsername(v)` also returns `v` (idempotence).
+_For any_ valid GitHub username `u`, `normalizeGithubUsername` returns `u` for each accepted form (`u`, `@u`, `github.com/u`, `https://github.com/u`, `http://www.github.com/u/`). _For any_ string `s` for which it returns a username `v`, `normalizeGithubUsername(v)` also returns `v` (idempotence).
 
 **Validates: Requirements 3.3, 4.2, 5.3**
 
 ### Property 5: Avatar source precedence
 
-*For any* valid contributor, `getAvatarSource` returns `{ kind: 'image', src: image }` when `image` is present, regardless of `github`. Otherwise it returns `{ kind: 'image', src: 'https://github.com/<github>.png' }` when `github` is present, and `{ kind: 'initials' }` when neither is present.
+_For any_ valid contributor, `getAvatarSource` returns `{ kind: 'image', src: image }` when `image` is present, regardless of `github`. Otherwise it returns `{ kind: 'image', src: 'https://github.com/<github>.png' }` when `github` is present, and `{ kind: 'initials' }` when neither is present.
 
 **Validates: Requirements 4.1, 4.2, 4.3**
 
 ### Property 6: Initials are derived from the name
 
-*For any* name containing at least one non-whitespace character, `getInitials` returns 1 or 2 code points. The first is the uppercased first code point of the first whitespace-separated word. When the name has two or more words, the second is the uppercased first code point of the last word.
+_For any_ name containing at least one non-whitespace character, `getInitials` returns 1 or 2 code points. The first is the uppercased first code point of the first whitespace-separated word. When the name has two or more words, the second is the uppercased first code point of the last word.
 
 **Validates: Requirements 4.3**
 
 ### Property 7: Social links match exactly the present fields
 
-*For any* valid contributor, `getSocialLinks` returns one link per present field among `github`, `linkedin`, `website`, `x` and no others, ordered `github, linkedin, website, x`. The GitHub link's `href` is `https://github.com/<github>`, and every other link's `href` equals its field value.
+_For any_ valid contributor, `getSocialLinks` returns one link per present field among `github`, `linkedin`, `website`, `x` and no others, ordered `github, linkedin, website, x`. The GitHub link's `href` is `https://github.com/<github>`, and every other link's `href` equals its field value.
 
 **Validates: Requirements 5.3, 5.4, 5.5, 5.6, 5.7**
 
 ### Property 8: Social link labels name the platform and the contributor
 
-*For any* valid contributor and every link returned by `getSocialLinks`, the `label` contains the contributor's `name` and the platform's display name (`GitHub`, `LinkedIn`, `האתר האישי`, `X`).
+_For any_ valid contributor and every link returned by `getSocialLinks`, the `label` contains the contributor's `name` and the platform's display name (`GitHub`, `LinkedIn`, `האתר האישי`, `X`).
 
 **Validates: Requirements 5.9**
 

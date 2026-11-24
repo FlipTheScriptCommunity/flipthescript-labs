@@ -16,7 +16,10 @@ export default function KeyPair({ state, setState }) {
   return (
     <Container
       header={
-        <Header variant="h2" description="You'll need the private key to securely connect to your instance after it launches.">
+        <Header
+          variant="h2"
+          description="You'll need the private key to securely connect to your instance after it launches."
+        >
           Key pair (login)
         </Header>
       }
@@ -24,19 +27,36 @@ export default function KeyPair({ state, setState }) {
       <SpaceBetween size="l">
         <RadioGroup
           value={state.keyPairMode}
-          onChange={(e) => setState((s) => ({ ...s, keyPairMode: e.detail.value }))}
+          onChange={(e) =>
+            setState((s) => ({ ...s, keyPairMode: e.detail.value }))
+          }
           items={[
             { value: 'existing', label: 'Choose an existing key pair' },
-            { value: 'proceed-without', label: 'Proceed without a key pair (Not recommended)' },
+            {
+              value: 'proceed-without',
+              label: 'Proceed without a key pair (Not recommended)',
+            },
           ]}
         />
 
         {state.keyPairMode === 'existing' && (
-          <FormField label="Key pair name" secondaryControl={<Link href="#" onFollow={(e) => e.preventDefault()}>Create new key pair</Link>}>
+          <FormField
+            label="Key pair name"
+            secondaryControl={
+              <Link href="#" onFollow={(e) => e.preventDefault()}>
+                Create new key pair
+              </Link>
+            }
+          >
             <Select
               placeholder="Select a key pair"
               selectedOption={selectedOption}
-              onChange={(e) => setState((s) => ({ ...s, keyPair: e.detail.selectedOption.value }))}
+              onChange={(e) =>
+                setState((s) => ({
+                  ...s,
+                  keyPair: e.detail.selectedOption.value,
+                }))
+              }
               options={options}
             />
           </FormField>
@@ -44,8 +64,9 @@ export default function KeyPair({ state, setState }) {
 
         {state.keyPairMode === 'proceed-without' && (
           <Alert type="warning">
-            If you proceed without a key pair, you won't be able to connect to the instance unless you choose an AMI that
-            is preconfigured with a password or other means of access.
+            If you proceed without a key pair, you won't be able to connect to
+            the instance unless you choose an AMI that is preconfigured with a
+            password or other means of access.
           </Alert>
         )}
       </SpaceBetween>

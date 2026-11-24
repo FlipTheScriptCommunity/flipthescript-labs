@@ -15,7 +15,12 @@ export default function AdvancedDetails({ state, setState }) {
         <FormField label="IAM instance profile">
           <Select
             selectedOption={{ value: state.iamRole, label: state.iamRole }}
-            onChange={(e) => setState((s) => ({ ...s, iamRole: e.detail.selectedOption.value }))}
+            onChange={(e) =>
+              setState((s) => ({
+                ...s,
+                iamRole: e.detail.selectedOption.value,
+              }))
+            }
             options={IAM_ROLES.map((r) => ({ value: r, label: r }))}
           />
         </FormField>
@@ -23,7 +28,9 @@ export default function AdvancedDetails({ state, setState }) {
         <FormField label="Shutdown behavior">
           <RadioGroup
             value={state.shutdownBehavior}
-            onChange={(e) => setState((s) => ({ ...s, shutdownBehavior: e.detail.value }))}
+            onChange={(e) =>
+              setState((s) => ({ ...s, shutdownBehavior: e.detail.value }))
+            }
             items={[
               { value: 'stop', label: 'Stop' },
               { value: 'terminate', label: 'Terminate' },
@@ -31,19 +38,32 @@ export default function AdvancedDetails({ state, setState }) {
           />
         </FormField>
 
-        <FormField label="Termination protection" description="Protect against accidental termination.">
+        <FormField
+          label="Termination protection"
+          description="Protect against accidental termination."
+        >
           <Toggle
             checked={state.terminationProtection}
-            onChange={(e) => setState((s) => ({ ...s, terminationProtection: e.detail.checked }))}
+            onChange={(e) =>
+              setState((s) => ({
+                ...s,
+                terminationProtection: e.detail.checked,
+              }))
+            }
           >
             Enable termination protection
           </Toggle>
         </FormField>
 
-        <FormField label="User data" description="Optional script that runs on first boot.">
+        <FormField
+          label="User data"
+          description="Optional script that runs on first boot."
+        >
           <Textarea
             value={state.userData}
-            onChange={(e) => setState((s) => ({ ...s, userData: e.detail.value }))}
+            onChange={(e) =>
+              setState((s) => ({ ...s, userData: e.detail.value }))
+            }
             placeholder={'#!/bin/bash\nyum update -y'}
             rows={6}
           />

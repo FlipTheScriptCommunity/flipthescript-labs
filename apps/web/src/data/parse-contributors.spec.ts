@@ -140,7 +140,11 @@ describe('parseContributors', () => {
       ['relative image path', 'image', 'image: ../secret.png'],
       ['image outside /contributors/', 'image', 'image: /other/x.png'],
       ['image with .. segment', 'image', 'image: /contributors/../secret.png'],
-      ['GitHub repository URL', 'github', 'github: https://github.com/user/repo'],
+      [
+        'GitHub repository URL',
+        'github',
+        'github: https://github.com/user/repo',
+      ],
       ['invalid GitHub username', 'github', 'github: bad_name!'],
       ['non-URL linkedin', 'linkedin', 'linkedin: linkedin.com/in/a'],
       ['ftp x URL', 'x', 'x: ftp://x.com/a'],

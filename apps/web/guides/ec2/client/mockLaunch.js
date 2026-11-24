@@ -28,7 +28,13 @@ function fakeInstanceId() {
 
 function fakeRequestId() {
   const hex = randomHex(16);
-  return [hex.slice(0, 8), hex.slice(8, 12), hex.slice(12, 16), hex.slice(16, 20), hex.slice(20, 32)].join('-');
+  return [
+    hex.slice(0, 8),
+    hex.slice(8, 12),
+    hex.slice(12, 16),
+    hex.slice(16, 20),
+    hex.slice(20, 32),
+  ].join('-');
 }
 
 export function mockLaunchInstance(payload) {
@@ -39,7 +45,10 @@ export function mockLaunchInstance(payload) {
       return;
     }
 
-    const count = Math.max(1, Math.min(20, parseInt(payload.numberOfInstances, 10) || 1));
+    const count = Math.max(
+      1,
+      Math.min(20, parseInt(payload.numberOfInstances, 10) || 1),
+    );
     const instanceIds = Array.from({ length: count }, fakeInstanceId);
 
     // Simulate the small delay of a real API call.
