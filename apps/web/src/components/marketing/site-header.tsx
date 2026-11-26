@@ -6,10 +6,11 @@ import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navLinks = [
-  { label: 'קורסים', href: '/courses' },
+  { label: 'מסלולים', href: '/tracks' },
+  { label: 'משתתפים', href: '/contributors' },
   // '/#mission', not a bare '#mission': the mission section only exists on
   // the homepage, so a same-page-only hash href silently did nothing on
-  // any other route (e.g. /courses) — there's no id="mission" there for
+  // any other route (e.g. /tracks) — there's no id="mission" there for
   // the browser to jump to. Prefixing with '/' sends the user home first,
   // then the hash resolves once that section actually exists in the DOM.
   { label: 'קהילה', href: '/#mission' },
@@ -18,7 +19,7 @@ const navLinks = [
 
 export function SiteHeader() {
   // Below the md breakpoint the desktop <nav> (hidden md:flex) disappears
-  // entirely with no fallback, which is what made קורסים/קהילה/GitHub
+  // entirely with no fallback, which is what made מסלולים/קהילה/GitHub
   // unreachable on mobile. This toggle drives a mobile-only dropdown panel
   // carrying the same links, opened via a hamburger button that only
   // renders below md (md:hidden — the mirror image of the desktop nav).
@@ -51,7 +52,7 @@ export function SiteHeader() {
 
           {/* Same bug as קהילה above: get-involved-section only renders on
               the homepage, so this needs the leading '/' to work from
-              other pages like /courses, not just a same-page hash. */}
+              other pages like /tracks, not just a same-page hash. */}
           <Button render={<Link href="/#get-involved" />}>מצטרפים</Button>
         </div>
 

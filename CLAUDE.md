@@ -12,11 +12,12 @@ FlipTheScript Academy — an Nx monorepo using Bun as the package manager and sc
 - **Shared types**: `libs/shared-types` holds DTOs (e.g. `Course`, `User`) shared between `apps/web` and `apps/api`.
 - **Infrastructure** (`infra/cdk`): AWS CDK (TypeScript) app provisioning DynamoDB tables (`DataStack`), and Lambda functions + HTTP API (`ApiStack`, which takes the table from `DataStack` as a prop). Entry point: `infra/cdk/bin/app.ts`.
 
-Current state: the API only exposes `GET /health` and `GET /courses` (a DynamoDB scan of a single `flipthescript-academy-courses` table). The `apps/web` frontend courses/labs content is currently static data (`apps/web/src/data/courses.ts`), not yet wired to the API.
+Current state: the API only exposes `GET /health` and `GET /courses` (a DynamoDB scan of a single `flipthescript-academy-courses` table). The `apps/web` frontend tracks/guides content is currently static data (`apps/web/src/data/tracks.ts`), not yet wired to the API.
 
 ## Branding conventions
 
 - The product is named **FlipTheScript Labs** — never "Academy". Update all UI text, page titles, and metadata accordingly.
+- Content terminology: a **track** (מסלול) groups **guides** (הדרכות — step-by-step console simulations, sources in `apps/web/guides/`) and, later, **labs** (מעבדות — multi-service challenges on a local Floci environment with automatic checks). Don't call guides "labs" or tracks "courses" in UI text or code; the `labs` name is reserved for those challenges.
 - The site header logo (`SiteHeader` in `apps/web/src/components/marketing/site-header.tsx`) must always link to `/` (the homepage).
 
 ## Commands
@@ -79,7 +80,7 @@ time, so it is a dashboard **build** variable, not a Worker runtime variable.
 - **CDK stacks are wired by dependency injection**: `ApiStack` receives `coursesTable` from `DataStack` as a constructor prop (see `infra/cdk/bin/app.ts`) rather than looking it up — follow this pattern when adding new stacks/resources.
 - **Lambda handlers** (`apps/api/src/handlers/*.ts`) are plain `APIGatewayProxyHandler` functions, each with a co-located `.spec.ts` vitest test. New handlers should be registered in `infra/cdk/lib/api-stack.ts` as a `NodejsFunction` + `httpApi.addRoutes(...)` pair, granted least-privilege DynamoDB access via `table.grantReadData`/`grantWriteData`.
 - **Env vars**: see `.env.example` for the full set (`AWS_REGION`, `COURSES_TABLE_NAME`, `NEXT_PUBLIC_API_URL`). Lambda handlers read table names from `process.env`.
-- **apps/web routing**: Next.js App Router under `apps/web/src/app`. Marketing sections live in `apps/web/src/components/marketing`; shared UI primitives (shadcn-style, `class-variance-authority` + `@base-ui/react`) live in `apps/web/src/components/ui`. Course/lab content routes (`/courses`, `/courses/[courseId]`, `/courses/[courseId]/labs/[labId]`) read from `apps/web/src/data/courses.ts` — update that file's `courses` array to add/edit course or lab content until it's backed by the API.
+- **apps/web routing**: Next.js App Router under `apps/web/src/app`. Marketing sections live in `apps/web/src/components/marketing`; shared UI primitives (shadcn-style, `class-variance-authority` + `@base-ui/react`) live in `apps/web/src/components/ui`. Track/guide content routes (`/tracks`, `/tracks/[trackId]`, `/tracks/[trackId]/guides/[guideId]`) read from `apps/web/src/data/tracks.ts` — update that file's `tracks` array to add/edit track or guide content until it's backed by the API. Old `/courses/...` URLs redirect to `/tracks/...` (`apps/web/next.config.js`).
 
 <!-- nx configuration start-->
 <!-- Leave the start & end comments to automatically receive updates. -->

@@ -7,7 +7,7 @@ const rubik = Rubik({ subsets: ['latin', 'hebrew'], variable: '--font-sans' });
 export const metadata = {
   title: 'FlipTheScript Labs',
   description:
-    'קורסים ומעבדות בחינם ללימוד DevOps ו-AWS, שנבנים על ידי קהילת FlipTheScript.',
+    'הדרכות ומעבדות בחינם ללימוד DevOps ו-AWS, שנבנות על ידי קהילת FlipTheScript.',
 };
 
 export default function RootLayout({

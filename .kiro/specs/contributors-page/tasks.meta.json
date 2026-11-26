@@ -1,0 +1,350 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Add pinned dependencies and the Vitest config": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363225
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435369714
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792505734547
+      }
+    ],
+    "2.1 Create the loader, register it, and declare the module type": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363267
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435370530
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792505734840
+      }
+    ],
+    "3.1 Implement `apps/web/src/data/parse-contributors.ts`": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363291
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792505739659
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792530102106
+      }
+    ],
+    "3.2 Write example-based unit tests in `apps/web/src/data/parse-contributors.spec.ts`": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363314
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792530105819
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792531332293
+      }
+    ],
+    "4. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363345
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573623012
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573682474
+      }
+    ],
+    "5.1 Create the seed data and local avatar folder": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363374
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435371379
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792505735676
+      }
+    ],
+    "5.2 Create `apps/web/src/data/contributors.ts`": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363395
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792530106621
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792531332653
+      }
+    ],
+    "5.3 Add a committed-file test to `apps/web/src/data/parse-contributors.spec.ts`": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363415
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792563180674
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573612844
+      }
+    ],
+    "6.1 Implement `apps/web/src/components/contributors/contributor-display.ts`": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363434
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792531340020
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792531580281
+      }
+    ],
+    "6.2 Write example-based unit tests in `apps/web/src/components/contributors/contributor-display.spec.ts`": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363457
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792563180702
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573614017
+      }
+    ],
+    "7. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363477
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573623495
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573683662
+      }
+    ],
+    "8.1 Create `apps/web/src/components/contributors/social-icons.tsx`": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363496
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792563181732
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573615206
+      }
+    ],
+    "8.2 Create `apps/web/src/components/contributors/contributor-card.tsx` (Server Component, no `'use client'`)": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363535
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573624320
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573684430
+      }
+    ],
+    "9.1 Create `apps/web/src/app/contributors/page.tsx`": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363557
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573688531
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573736477
+      }
+    ],
+    "9.2 Add the header nav entry in `apps/web/src/components/marketing/site-header.tsx`": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363580
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792563182628
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573615918
+      }
+    ],
+    "10.1 Run the full checks and confirm the static and bundle constraints": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363599
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573740180
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573809841
+      }
+    ],
+    "11. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792435363621
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573810604
+      },
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573841544
+      }
+    ],
+    "1. Set up dependencies and test tooling for apps/web": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792505734587
+      }
+    ],
+    "2. Wire the YAML raw-text import into both bundlers": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792505734881
+      }
+    ],
+    "3. Implement the pure contributors parser": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792531332351
+      }
+    ],
+    "5. Add the contributors data file and entry point": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573612878
+      }
+    ],
+    "6. Implement the display helpers": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573614061
+      }
+    ],
+    "8. Build the contributor UI components": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573684466
+      }
+    ],
+    "9. Add the page and the navigation link": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573736507
+      }
+    ],
+    "10. Final verification": [
+      {
+        "executionId": "a98dd3b5-4db0-4783-b9c9-ce71a3f729fa",
+        "chatSessionId": "sess_f63795b2-f9c7-4502-bc51-fde385fede10",
+        "timestamp": 1792573809884
+      }
+    ]
+  }
+}

@@ -1,0 +1,36 @@
+# Contributors shown on /contributors, in this order.
+#
+# Fields (only `name` is required):
+#   name:     Display name (required)
+#   role:     Short role/description, shown under the name
+#   image:    https:// URL, or a file under apps/web/public/contributors/
+#             referenced as /contributors/<file>
+#             (when omitted, the GitHub avatar is used, then initials)
+#   github:   GitHub username or profile URL
+#   linkedin: Full LinkedIn profile URL
+#   website:  Full personal website URL
+#   x:        Full X profile URL
+#
+# Invalid entries fail `bunx nx build web` with the entry index and field name.
+
+- name: Moti Shaul
+  role: Founder & Developer
+  image: /contributors/moti-shaul.jpg
+  website: https://motishaul.website
+  linkedin: https://www.linkedin.com/in/moti-shaul/
+
+- name: Naor Peled
+  role: Co-Founder & Advisor
+  image: /contributors/naor-peled.jpg
+  linkedin: https://www.linkedin.com/in/naorpeled/
+
+- name: Daniel Kohav
+  role: Team Lead & Developer
+  image: /contributors/daniel-kohav.jpg
+  linkedin: https://www.linkedin.com/in/daniel-kohav/
+
+- name: Ben Levi
+  role: Lab Author
+  github: https://github.com/Ben-levi
+  website: https://ben-levi.github.io/Ben-levi/
+  linkedin: https://www.linkedin.com/in/ben-levi-442790240/

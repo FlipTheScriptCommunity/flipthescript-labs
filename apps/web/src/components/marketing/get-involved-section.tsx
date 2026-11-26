@@ -14,7 +14,7 @@ export function GetInvolvedSection() {
           <Button
             size="lg"
             className="px-6 text-base font-extrabold"
-            render={<Link href="/courses" />}
+            render={<Link href="/tracks" />}
           >
             להתחיל ללמוד
           </Button>
